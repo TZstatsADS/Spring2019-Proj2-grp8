@@ -57,11 +57,11 @@ ui <- dashboardPage(skin = "yellow",
                                   ),
                                   column(width = 1,
                                          style = "width:150px;display:inline-block;margin-right: 0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
-                                         selectInput("region1", "Choice 2:", choices=c('NA','Museums','Theatre','Restaurant'))
+                                         selectInput("region2", "Choice 2:", choices=c('NA','Museums','Theatre','Restaurant'))
                                   ),
                                   column(width = 1,
                                          style = "width:150px;display:inline-block;margin-right: 0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
-                                         selectInput("region1", "Choice 3:", choices=c('NA','Museums','Theatre','Restaurant'))
+                                         selectInput("region3", "Choice 3:", choices=c('NA','Museums','Theatre','Restaurant'))
                                   ),
                                   column(width = 1,
                                          style = "width:150px;display:inline-block;margin-right: 0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
