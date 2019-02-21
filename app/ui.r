@@ -23,28 +23,20 @@ ui <- dashboardPage(skin = "yellow",
                     dashboardSidebar(
                       sidebarMenu(
                         id="tabs",
-                        menuItem("Page1",tabName = "prerequisite1",icon = icon("book")),
-                        menuItem("Page2", tabName = "overview",icon = icon("dashboard")),
-                        menuItem("Page3", tabName = "challenges",icon = icon("cogs"))
+                        menuItem("Page1",tabName = "Page_1",icon = icon("book")),
+                        menuItem("Page2", tabName = "Page_2",icon = icon("dashboard")),
+                        menuItem("Page3", tabName = "Page_3",icon = icon("cogs"))
                       )
                     ),
                     dashboardBody(
                       tags$head(
                         tags$link(rel = "stylesheet", type = "text/css", href = "stylecssMouseExp.css")
-                        
-                        # tags$style(HTML(
-                        # '.popover-title{
-                        # color:black;
-                        # font-size:16px;
-                        # background-color: orange
-                        # }'
-                        # ))
                       ),
                       tabItems(
                         
-                        #prerequiste tab content
+                        #Page 1 tab content
                         
-                        tabItem(tabName = "prerequisite1",
+                        tabItem(tabName = "Page_1",
                                 
                               
                            
@@ -56,65 +48,56 @@ ui <- dashboardPage(skin = "yellow",
                         ),
                         
                         # First tab content
-                        tabItem(tabName = "overview",
-                                #tags$a(href='http://stat.psu.edu/',   tags$img(src='logo.png', align = "left", width = 180)),
-
-                                # div(style = "text-align:center",
-                                #     bsButton("start", "GO", icon("bolt"), size = "large",style = "warning")),
-                                fluidPage(    
-                                  
-                                  # Give the page a title
-                                  
-                                  # Generate a row with a sidebar
-                                  sidebarLayout(      
-                                    
-                                    # Define the sidebar with one input
-                                    sidebarPanel(
-                                      selectInput("region1", "Choice 1:", 
-                                                  choices=c('Restaurant','NA','Museums','Theatre')),
-                                      selectInput("region2", "Choice 2:", 
-                                                  choices=c('NA','Museums','Theatre','Restaurant')),
-                                      selectInput("region3", "Choice 3:", 
-                                                  choices=c('NA','Museums','Theatre','Restaurant')),
-                                      conditionalPanel("input.region1 == 'Restaurant' || input.region2 == 'Restaurant' || input.region3 == 'Restaurant'" ,
-                                                       selectInput('type1','Restaurant Type',c("ALL",type))),
-                                      
-                                      hr(),
-                                      column(9, 
-                                             br(),
-                                             br(),
-                                             tabsetPanel(type = "tabs",
-                                                         tabPanel("Choice 1", dataTableOutput("table1")),
-                                                         tabPanel("Choice 2", dataTableOutput("table2")),
-                                                         tabPanel("Choice 3", dataTableOutput("table3"))
-                                             )
-                                             
-                                      )
+                        tabItem(tabName = "Page_2",
+                                ################# First Row #################
+                                fluidRow(
+                                  column(width = 1,
+                                         style = "width:150px;display:inline-block;margin-right: 20px;margin-bottom:0px;margin-top:0px;padding-right:0px",
+                                         selectInput("region1", "Choice 1:", choices=c('Restaurant','NA','Museums','Theatre'))
+                                  ),
+                                  column(width = 1,
+                                         style = "width:150px;display:inline-block;margin-right: 0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
+                                         selectInput("region1", "Choice 2:", choices=c('NA','Museums','Theatre','Restaurant'))
+                                  ),
+                                  column(width = 1,
+                                         style = "width:150px;display:inline-block;margin-right: 0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
+                                         selectInput("region1", "Choice 3:", choices=c('NA','Museums','Theatre','Restaurant'))
+                                  ),
+                                  column(width = 1,
+                                         style = "width:150px;display:inline-block;margin-right: 0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
+                                         conditionalPanel(
+                                           "input.region1 == 'Restaurant' || input.region2 == 'Restaurant' || input.region3 == 'Restaurant'" ,
+                                           selectInput('type1','Restaurant Type',c("ALL",type))
+                                         )
+                                  ),
+                                  column(width=1, 
+                                         style = "margin-top:25px;display:inline-block;margin-left:500px;",
+                                         actionButton("button2",label="Reset Map") 
+                                  )
+                                ),
+                                
+                                ################ Second Row ###################
+                                mainPanel(
+                                  fluidRow(
+                                    column(8,
+                                           style = "width:500px;display:inline-block;margin-right:0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
+                                           tabsetPanel(type = "tabs",
+                                                       tabPanel("Choice 1", dataTableOutput("table1")),
+                                                       tabPanel("Choice 2", dataTableOutput("table2")),
+                                                       tabPanel("Choice 3", dataTableOutput("table3"))
+                                           )
                                     ),
                                     
-                                    
-                                    
-                                    
-                                    # Create a spot for the barplot
-                                    mainPanel(
-                                      column(width=1, 
-                                             actionButton("button2",label="Reset Map" 
-                                                          #,style="padding:12px; font-size:80%;color: #fff; background-color: #337ab7; border-color: #2e6da4"
-                                             )),
-                                      
-                                      leafletOutput("map1", width = "200%", height = 400)
+                                    column(width = 4,
+                                           leafletOutput("map1", width = "260%", height = 550)
+                                           
                                     )
                                   )
-                                  
                                 )
-                                
-                             
-                                
-                                
                         ),
                         
                         # Second tab content
-                        tabItem(tabName = "challenges",
+                        tabItem(tabName = "Page_3",
                                  titlePanel("Plan your day"),
                                 
                                 # Sidebar with a slider input for number of bins 
