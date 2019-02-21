@@ -115,7 +115,7 @@ ui <- dashboardPage(skin = "yellow",
                         
                         # Second tab content
                         tabItem(tabName = "challenges",
-                                titlePanel("Plan your day"),
+                                 titlePanel("Plan your day"),
                                 
                                 # Sidebar with a slider input for number of bins 
                                 sidebarLayout(
@@ -132,19 +132,23 @@ ui <- dashboardPage(skin = "yellow",
                                            
                                   ),
                                   
+                                  
                                   # Show a plot of the generated distribution
                                   mainPanel(
-                                    verbatimTextOutput("action"),
                                     verbatimTextOutput("errorput"),
-                                    verbatimTextOutput("locationin"),
-                                    column(12,leafletOutput("map"),
+                                    column(4,verbatimTextOutput("c1"),
+                                           verbatimTextOutput("c2"),
+                                           
+                                           verbatimTextOutput("target1"),
+                                           verbatimTextOutput("target3"),
+                                           verbatimTextOutput("target2")),
+                                    column(8,leafletOutput("map",width = "160%", height = 400),
                                            conditionalPanel('input.submit4 >0 && input.submit > 0',
                                                             absolutePanel(id="legend",
                                                                           class = "panel panel-default",
-                                                                          col = 'red',
                                                                         
                                                                          
-                                                                          top = 0, left = "auto", right = 0, bottom = "auto",
+                                                                          top = 0, left = "auto", right = -278, bottom = "auto",
                                                                           width = 100, height = 150,
                                                                           
                                                                           h5("Select Features"),
@@ -155,21 +159,10 @@ ui <- dashboardPage(skin = "yellow",
                                            )
                                            
                                            
-                                           ),
-                                    verbatimTextOutput("c1"),
-                                    verbatimTextOutput("c2"),
+                                           )
                                     
-                                    verbatimTextOutput("target1"),
-                                    verbatimTextOutput("target3"),
-                                    verbatimTextOutput("target2")
                                   )
                                 )
-                        
-                                  
-                                  
-                                  
-                              
-                  
                                   
                                   
                                   
