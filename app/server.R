@@ -1,25 +1,20 @@
 library(geosphere)
 library(ggmap)
 
-museum<-na.omit(read.csv("museums.csv"))
-theatre<-read.csv('theatre.csv')
-restaurant<- read.csv('restaurant_new.csv')
+restaurant<- read.csv('../output/restaurant_new.csv')
 type <- unique(as.character(restaurant$TYPE))
-namedata<-c("Deli","Museum","Theater","Gallery","Library","Market")
-Deli<-na.omit(read.csv("Deli.csv",header=T))
-Deli$URL<-"Unavailable"
-Market<-na.omit(read.csv("Market.csv",header=T))
-Market$URL<-"Unavailable"
-Gallery<-na.omit(read.csv("Gallery.csv",header=T))
-Library<-na.omit(read.csv("Library.csv",header=T))
-Museum<-na.omit(read.csv("Museum.csv",header=T))
-Restaurant<-na.omit(read.csv("Restaurant.csv",header=T))
+namedata<-c("Museum","Theatre","Gallery","Library")
+Gallery<-na.omit(read.csv("../output/Gallery.csv",header=T))
+Library<-na.omit(read.csv("../output/Library.csv",header=T))
+Museum<-na.omit(read.csv("../output/Museum.csv",header=T))
+Restaurant<-na.omit(read.csv("../output/Restaurant.csv",header=T))
 Restaurant$URL<-"Unavailable"
-Theater<-na.omit(read.csv("Theater.csv",header=T))
-all_data<-list(Deli=Deli,Market=Market,Gallery=Gallery,Library=Library,Museum=Museum,Restaurant=Restaurant,Theater=Theater)
+Theatre<-na.omit(read.csv("../output/Theater.csv",header=T))
+all_data<-list(Gallery=Gallery,Library=Library,Museum=Museum,Restaurant=Restaurant,Theatre=Theatre)
 register_google("AIzaSyA8OuCvy04PC3N-K9y6DdEc32hUpNyUrl8")
-load("output/sub.station.RData")
-load("output/bus.stop.RData")
+load("../output/sub.station.RData")
+load("../output/bus.stop.RData")
+source("../lib/global.R")
 # Define a server for the Shiny app
 function(input, output) {
   
@@ -83,11 +78,11 @@ function(input, output) {
   output$table1 <- renderDataTable({
 
     if (input$region1 == 'Museums'){
-      print(museum[,1:3])
+      print(Museum[,1:3])
 
     }
     else if(input$region1 == 'Theatre'){
-      print(theatre)
+      print(Theatre)
 
     }
     else if(input$region1 == 'Restaurant') {
@@ -103,11 +98,11 @@ function(input, output) {
    output$table2 <- renderDataTable({
     
     if (input$region2 == 'Museums'){
-      print(museum[,1:3])
+      print(Museum[,1:3])
       
     }
     else if(input$region2 == 'Theatre'){
-      print(theatre)
+      print(Theatre)
       
     }
     else if(input$region2 == 'Restaurant') {
@@ -122,11 +117,11 @@ function(input, output) {
     output$table3 <- renderDataTable({
       
       if (input$region3 == 'Museums'){
-        print(museum[,1:3])
+        print(Museum[,1:3])
         
       }
       else if(input$region3 == 'Theatre'){
-        print(theatre)
+        print(Theatre)
         
       }
       else if(input$region3 == 'Restaurant') {
@@ -179,7 +174,7 @@ function(input, output) {
       output$locationin<-renderText(input$location)
       observeEvent(input$submit4,{
         index<-sample(1:4,2,replace=F)
-        choice<-c("Theater","Museum","Gallery","Library","Restaurant")
+        choice<-c("Theatre","Museum","Gallery","Library","Restaurant")
         choice1<-choice[index[1]]
         choice2<-choice[index[2]]
         index[3]<-length(choice)
@@ -219,7 +214,7 @@ function(input, output) {
           if(p==TRUE){
             proxy %>% 
               addMarkers(data=sub.station, ~lng, ~lat,label = ~info,icon=icons(
-                iconUrl = "output/icons8-Bus-48.png",
+                iconUrl = "icon/icons8-Bus-48.png",
                 iconWidth = 10, iconHeight = 10),group="subway")
           }
           else proxy%>%clearGroup(group="subway")
@@ -234,7 +229,7 @@ function(input, output) {
           if(p==TRUE){
             proxy %>% 
               addMarkers(data=bus.stop, ~lng, ~lat,label = ~info,icon=icons(
-                iconUrl = "output/icons8-Bus-48.png",
+                iconUrl = "icon/bus.png",
                 iconWidth =10, iconHeight = 10),layerId=as.character(bus.stop$info))
           }
           else proxy%>%removeMarker(layerId=as.character(bus.stop$info))

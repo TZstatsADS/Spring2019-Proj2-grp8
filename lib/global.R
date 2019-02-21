@@ -22,20 +22,17 @@ library(shinydashboard)
 library(shinythemes)
 library(XML)
 
-Deli<-na.omit(read.csv("../data/Deli.csv",header=T))
-Deli$URL<-"Unavailable"
-Market<-na.omit(read.csv("../data/Market.csv",header=T))
-Market$URL<-"Unavailable"
-Gallery<-na.omit(read.csv("../data/Gallery.csv",header=T))
-Library<-na.omit(read.csv("../data/Library.csv",header=T))
-Museum<-na.omit(read.csv("../data/Museum.csv",header=T))
-Restaurant<-na.omit(read.csv("../data/Restaurant.csv",header=T))
+
+Gallery<-na.omit(read.csv("../output/Gallery.csv",header=T))
+Library<-na.omit(read.csv("../output/Library.csv",header=T))
+Museum<-na.omit(read.csv("../output/Museum.csv",header=T))
+Restaurant<-na.omit(read.csv("../output/Restaurant.csv",header=T))
 Restaurant$URL<-"Unavailable"
-Theater<-na.omit(read.csv("../data/Theater.csv",header=T))
-all_data<-list(Deli=Deli,Market=Market,Gallery=Gallery,Library=Library,Museum=Museum,Restaurant=Restaurant,Theater=Theater)
+Theater<-na.omit(read.csv("../output/Theater.csv",header=T))
+all_data<-list(Gallery=Gallery,Library=Library,Museum=Museum,Restaurant=Restaurant,Theater=Theater)
 
 Type<-as.character(unique(Restaurant$TYPE))
-Selection=list(N.A="N.A",Market="Market",Deli="Deli",Library="Library",Theater="Theater",Museum="Museum",Gallery="Gallery",Restaurant=Type)
+Selection=list(N.A="N.A",Library="Library",Theater="Theater",Museum="Museum",Gallery="Gallery",Restaurant=Type)
 
 
 randomchoice<-function(data){

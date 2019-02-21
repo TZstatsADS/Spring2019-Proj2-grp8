@@ -15,7 +15,7 @@ library(geosphere)
 library(ggmap)
 # Use a fluid Bootstrap layout
 
-restaurant<- read.csv('restaurant_new.csv')
+restaurant<- read.csv('../output/restaurant_new.csv')
 type <- unique(as.character(restaurant$TYPE))
 
 ui <- dashboardPage(skin = "yellow",
