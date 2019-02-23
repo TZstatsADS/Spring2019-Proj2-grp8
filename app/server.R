@@ -1,16 +1,14 @@
 library(geosphere)
 library(ggmap)
 
-restaurant<- read.csv('../output/restaurant_new.csv')
-type <- unique(as.character(restaurant$TYPE))
+restaurant<-read.csv("../output/restaurant_final.csv")
+type <- unique(as.character(restaurant$CUISINE))
 namedata<-c("Museum","Theatre","Gallery","Library")
 Gallery<-na.omit(read.csv("../output/Gallery.csv",header=T))
 Library<-na.omit(read.csv("../output/Library.csv",header=T))
 Museum<-na.omit(read.csv("../output/Museum.csv",header=T))
-Restaurant<-na.omit(read.csv("../output/Restaurant.csv",header=T))
-Restaurant$URL<-"Unavailable"
 Theatre<-na.omit(read.csv("../output/Theater.csv",header=T))
-all_data<-list(Gallery=Gallery,Library=Library,Museum=Museum,Restaurant=Restaurant,Theatre=Theatre)
+all_data<-list(Gallery=Gallery,Library=Library,Museum=Museum,Restaurant=restaurant,Theatre=Theatre)
 register_google("AIzaSyA8OuCvy04PC3N-K9y6DdEc32hUpNyUrl8")
 load("../output/sub.station.RData")
 load("../output/bus.stop.RData")
@@ -42,6 +40,13 @@ function(input, output) {
                  lng=restaurant$LON,
                  lat=restaurant$LAT,
                  clusterOptions=markerClusterOptions(),
+                 icon=list(iconUrl=paste('icon/',"Restaurant",'.png',sep = ""),iconSize=c(20,20)),
+                 popup=paste("Name:",a(restaurant$NAME, href = restaurant$URL),"<br/>",
+                             "Tel:",restaurant$TEL,"<br/>",
+                             "Price:",restaurant$PRICE,"<br/>",
+                             "Rating:",restaurant$RATING,"<br/>",
+                             "GRADE:",restaurant$GRADE,"<br/>",
+                             "Address:",restaurant$ADDRESS),
                  group="housing_cluster"
       )
   })
@@ -90,7 +95,7 @@ function(input, output) {
         print(restaurant)
       }
       else{
-        print(restaurant[restaurant$TYPE == as.character(input$type1),])
+        print(restaurant[restaurant$CUISINE == as.character(input$type1),])
       }
 
     }
@@ -110,7 +115,7 @@ function(input, output) {
         print(restaurant)
       }
       else{
-        print(restaurant[restaurant$TYPE == as.character(input$type1),])
+        print(restaurant[restaurant$CUISINE == as.character(input$type1),])
       }      
     }
   })
@@ -129,7 +134,7 @@ function(input, output) {
           print(restaurant)
         }
         else{
-          print(restaurant[restaurant$TYPE == as.character(input$type1),])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
         }        
       }
     })

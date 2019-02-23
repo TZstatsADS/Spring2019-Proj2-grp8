@@ -68,3 +68,9 @@ gallery$LON<-LON
 gallery<-gallery%>%
   select(NAME,TEL,URL,ADDRESS=ADDRESS1,ZIP,LAT,LON)
 write_csv(gallery, "../output/Gallery.csv")
+
+res<-read.csv("../output/restaurant_complete.csv")
+res<-res[!is.na(res$LAT),]
+res$TEL<-res$PHONE
+res<-res[,c(-1,-2)]
+write_csv(res, "../output/restaurant_final.csv")
