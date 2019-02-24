@@ -141,29 +141,29 @@ ui <- dashboardPage(skin = "yellow",
                                 mainPanel(
                                   column(6,
                                          fluidRow(
-                                           column(6,
+                                           column(8,
+                                          
                                            #helpText("Pleae enter your location"),
-                                           textInput("location","Pleae enter your current location", width = "250px")),
-                                           column(6,
-                                                  style = "margin-top:25px",
-                                                  actionButton("submit","Confirm Your Location",icon("map-marker"), width  ="200px"))
+                                           textInput("location",placeholder = "Enter your location",label = NULL, width = "400px")),
+                                           column(4,
+                                                  #style = "margin-top:25px",
+                                                  actionButton("submit","Confirm",icon("map-marker"), width  ="100px"))
                                          ),
                                          
                                          br(),p(),
-                                         sliderInput("distance", "Please choose distance from you (in km)", min = 0, max = 20, value = 1, step= 0.1, width = "500px"),
+                                         sliderInput("distance", "Please choose distance from you (in km):", min = 0, max = 20, value = 1, step= 0.1, width = "500px"),
                                          br(),p(),
-                                         actionButton("submit4", label="Not for you? Try Again!",style="opacity:0.8",align="left"),
+                                         actionButton("submit4", label="Feeling Lucky!",style="opacity:0.9",align="left"),
                                          br(),p(),br(),p(),
                                          verbatimTextOutput("errorput"),
                                          verbatimTextOutput("c1"),
-                                                verbatimTextOutput("c2"),
-                                                
-                                                verbatimTextOutput("target1"),
-                                                verbatimTextOutput("target3"),
-                                                verbatimTextOutput("target2")
+                                         verbatimTextOutput("c2"),
+                                         verbatimTextOutput("target1"),
+                                         verbatimTextOutput("target3"),
+                                         verbatimTextOutput("target2")
                                          ),
                                   column(6,
-                                         leafletOutput("map",width = "160%", height = 550),
+                                         leafletOutput("map",width = "200%", height = 550),
                                          conditionalPanel('input.submit4 >0 && input.submit > 0',
                                                           absolutePanel(id="legend",
                                                                         class = "panel panel-default",
