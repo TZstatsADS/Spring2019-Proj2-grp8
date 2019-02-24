@@ -112,73 +112,6 @@ function(input, output) {
     )
   })
   
-  #subset museum
-  observe({
-    museum_subset = MuseumInBounds()
-    
-    if (nrow(museum_subset) != 0){
-      Museum = museum_subset
-    }
-    output$table1 <- renderDataTable({
-      
-      if (input$region1 == 'Museums'){
-        print(Museum[,1:3])
-        
-      }
-      else if(input$region1 == 'Theatre'){
-        print(Theatre)
-        
-      }
-      else if(input$region1 == 'Restaurant') {
-        if (input$type1 == 'ALL'){
-          print(restaurant)
-        }
-        else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
-        }
-        
-      }
-    }) 
-    output$table2 <- renderDataTable({
-      
-      if (input$region2 == 'Museums'){
-        print(Museum[,1:3])
-        
-      }
-      else if(input$region2 == 'Theatre'){
-        print(Theatre)
-        
-      }
-      else if(input$region2 == 'Restaurant') {
-        if (input$type1 == 'ALL'){
-          print(restaurant)
-        }
-        else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
-        }      
-      }
-    })
-    output$table3 <- renderDataTable({
-      
-      if (input$region3 == 'Museums'){
-        print(Museum[,1:3])
-        
-      }
-      else if(input$region3 == 'Theatre'){
-        print(Theatre)
-        
-      }
-      else if(input$region3 == 'Restaurant') {
-        if (input$type1 == 'ALL'){
-          print(restaurant)
-        }
-        else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
-        }        
-      }
-    })
-    })
-  
   # get the theatre data in the bounds
   TheatreInBounds <- reactive({
     if (is.null(input$map1_bounds))
@@ -192,73 +125,6 @@ function(input, output) {
              LAT>= latRng[1] & LAT <= latRng[2] &
                LON >= lngRng[1] & LON <= lngRng[2])
     )
-  })
-  
-  #subset theatre
-  observe({
-    theatre_subset = TheatreInBounds()
-    
-    if (nrow(theatre_subset) != 0){
-      Theatre = theatre_subset
-    }
-    output$table1 <- renderDataTable({
-      
-      if (input$region1 == 'Museums'){
-        print(Museum[,1:3])
-        
-      }
-      else if(input$region1 == 'Theatre'){
-        print(Theatre)
-        
-      }
-      else if(input$region1 == 'Restaurant') {
-        if (input$type1 == 'ALL'){
-          print(restaurant)
-        }
-        else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
-        }
-        
-      }
-    }) 
-    output$table2 <- renderDataTable({
-      
-      if (input$region2 == 'Museums'){
-        print(Museum[,1:3])
-        
-      }
-      else if(input$region2 == 'Theatre'){
-        print(Theatre)
-        
-      }
-      else if(input$region2 == 'Restaurant') {
-        if (input$type1 == 'ALL'){
-          print(restaurant)
-        }
-        else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
-        }      
-      }
-    })
-    output$table3 <- renderDataTable({
-      
-      if (input$region3 == 'Museums'){
-        print(Museum[,1:3])
-        
-      }
-      else if(input$region3 == 'Theatre'){
-        print(Theatre)
-        
-      }
-      else if(input$region3 == 'Restaurant') {
-        if (input$type1 == 'ALL'){
-          print(restaurant)
-        }
-        else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
-        }        
-      }
-    })
   })
   
   # get the restaurant data in the bounds
@@ -276,13 +142,16 @@ function(input, output) {
     )
   })
   
-  #subset restaurant
+  #subset dataset
   observe({
+    museum_subset = MuseumInBounds()
+    theatre_subset = TheatreInBounds()
     restaurant_subset = RestaurantInBounds()
     
-    if (nrow(restaurant_subset) != 0){
-      Restaurant = restaurant_subset
+    if (nrow(museum_subset) != 0){
+      Museum = museum_subset
     }
+    
     output$table1 <- renderDataTable({
       
       if (input$region1 == 'Museums'){
@@ -341,10 +210,7 @@ function(input, output) {
         }        
       }
     })
-  })
-  
-
-  
+    })
  
   # Fill in the spot we created for a plot
   # output$table1 <- renderDataTable({

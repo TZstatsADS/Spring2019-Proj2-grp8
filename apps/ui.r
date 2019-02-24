@@ -124,7 +124,8 @@ ui <- dashboardPage(skin = "yellow",
                                     ),
                                     
                                     column(width = 4,
-                                           leafletOutput("map1", width = "260%", height = 550)
+                                           style = "width:300px;display:inline-block;margin-right:0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
+                                           leafletOutput("map1", width = "250%", height = 550)
                                           
                                            
                                     )
@@ -134,7 +135,13 @@ ui <- dashboardPage(skin = "yellow",
                         
                         # Second tab content
                         tabItem(tabName = "Page_3",
-                                 titlePanel("Plan your day"),
+                                titlePanel("Plan your day (need more text description)"),
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 # Sidebar with a slider input for number of bins 
                                 sidebarLayout(
@@ -144,9 +151,9 @@ ui <- dashboardPage(skin = "yellow",
                                                
                                                width = 280, height = 550,
                                                
-                                               textInput("location",label = h3("Enter Your Location"),"Current Location"),
-                                               actionButton("submit","Mark Your Location",icon("map-marker")),
-                                               sliderInput("distance", "Distance From You (in km)", min = 0, max = 20, value = 1, step= 0.1),
+                                               textInput("location",label = h4("Enter Your Location"),"Current Location", width = "200px"),
+                                               actionButton("submit","Mark Your Location",icon("map-marker"), width  ="200px"),
+                                               sliderInput("distance", "Distance From You (in km)", min = 0, max = 20, value = 1, step= 0.1, width = "200px"),
                                                actionButton("submit4", label="Go!",style="opacity:0.8",align="left")
                                            
                                   ),
