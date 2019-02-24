@@ -14,6 +14,8 @@ load("../output/sub.station.RData")
 load("../output/bus.stop.RData")
 source("../lib/global.R")
 # Define a server for the Shiny app
+all_data1 = list(museum = museum,theatre = theatre, restaurant = restaurant)
+namedata1 = c('museum','theatre','restaurant')
 function(input, output) {
   
   
@@ -32,23 +34,66 @@ function(input, output) {
     
   })
   ###map
-  output$map1 <- renderLeaflet({
-    leaflet() %>%
-      addProviderTiles('Esri.WorldTopoMap') %>%
-      setView(lng = -73.971035, lat = 40.775659, zoom = 12) %>%
-      addMarkers(data=restaurant,
-                 lng=restaurant$LON,
-                 lat=restaurant$LAT,
-                 clusterOptions=markerClusterOptions(),
-                 icon=list(iconUrl=paste('icon/',"Restaurant",'.png',sep = ""),iconSize=c(20,20)),
-                 popup=paste("Name:",a(restaurant$NAME, href = restaurant$URL),"<br/>",
-                             "Tel:",restaurant$TEL,"<br/>",
-                             "Price:",restaurant$PRICE,"<br/>",
-                             "Rating:",restaurant$RATING,"<br/>",
-                             "GRADE:",restaurant$GRADE,"<br/>",
-                             "Address:",restaurant$ADDRESS),
-                 group="housing_cluster"
-      )
+   output$map1 <- renderLeaflet({
+    
+    map <- leaflet() %>%addProviderTiles('Esri.WorldTopoMap') %>%
+      setView(-73.983,40.7639,zoom = 13)
+    
+    for (i in 1:length(namedata1)){
+      leafletProxy('map1',data=all_data[[namedata1[i]]]) %>%
+        addMarkers(
+          
+          clusterOptions = markerClusterOptions(),
+          lng=all_data1[[namedata1[i]]]$LON,
+          lat=all_data1[[namedata1[i]]]$LAT,
+          group=namedata1[i] )
+      print(head(all_data1[[namedata1[i]]]$LON))
+      print(head(all_data1[[namedata1[i]]]$LAT))
+    }
+    map%>%hideGroup(c('museum','theatre'))
+    
+     Type<-as.character(unique(restaurant$TYPE))
+     Group<-c('American', 'Asian', 'Chinese' ,'Dessert', 'European', 'French','Italian', 'Mexcian' ,'Other', 'QuickMeal' , 'Seafood')
+     for (i in 1:11){
+       leafletProxy("map1") %>%
+         addMarkers(
+           data=Restaurant[Restaurant$TYPE==Type[i],],
+           clusterOptions = markerClusterOptions(),
+           lng=Restaurant[Restaurant$TYPE==Type[i],]$LON,lat=Restaurant[Restaurant$TYPE==Type[i],]$LAT,
+           group=Group[i] )
+     }
+     map%>%hideGroup(c('American', 'Asian', 'Chinese' ,'Dessert', 'European', 'French','Italian', 'Mexcian' ,'Other', 'QuickMeal' , 'Seafood'))
+
+    })
+  
+  observeEvent(input$region1,{
+    leafletProxy("map1") %>%
+      showGroup(input$region1)
+
+  })    
+  
+  observeEvent(input$region2,{
+    if(input$region2 == "NA" ){leafletProxy("map1")%>%showGroup(input$region1)}
+    else {leafletProxy("map1")%>%
+        hideGroup(c('museum','theatre','restaurant','American', 'Asian', 'Chinese' ,'Dessert', 'European', 'French','Italian', 'Mexcian' ,'Other', 'QuickMeal' , 'Seafood'))%>%
+        showGroup(c(input$region2))}
+  })
+  
+  
+  
+  observeEvent(input$region3,{
+    if("NA" == input$region3){leafletProxy("map1")%>%showGroup(c(input$region1,input$region2))}
+    else {leafletProxy("map1")%>%
+        hideGroup(c('museum','theatre','restaurant','American', 'Asian', 'Chinese' ,'Dessert', 'European', 'French','Italian', 'Mexcian' ,'Other', 'QuickMeal' , 'Seafood'))%>%
+        showGroup(c(input$region3))}
+  })
+  
+  observeEvent(input$type1,{
+    if(input$type1 == 'ALL'){leafletProxy("map1")%>%showGroup(c(input$region1,input$region2,input$region2))}
+    else {leafletProxy("map1")%>%
+        hideGroup(c('museum','theatre','restaurant','American', 'Asian', 'Chinese' ,'Dessert', 'European', 'French','Italian', 'Mexcian' ,'Other', 'QuickMeal' , 'Seafood'))%>%
+        showGroup(c(input$type1))}
+    print(input$type1)
   })
   
   # observe({
