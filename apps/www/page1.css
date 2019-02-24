@@ -21,7 +21,7 @@ div.map {
   right: 0;
   bottom: 0;
   overflow: hidden;
-  padding: 0;
+  padding: 10px;
 }
 
 
@@ -41,7 +41,7 @@ body, label, input, button, select {
   font-family: 'Helvetica Neue', Helvetica;
   font-weight: 200;
 }
-h1, h2, h3, h4 { font-weight: 400;}
+
 
 .button1 {
     background-color: white;
@@ -67,33 +67,29 @@ h1, h2, h3, h4 { font-weight: 400;}
   padding: 0;
 }
 
-#container {
-    width: 300px;
-	height: 180px;
-    background-color: white;
-    margin: auto;
-}
-
-
-#first {
-    width: 150px;
-    float: left;
-    height: 150px;
-    
-}
-#second {
-    width: 150px;
-    float: left;
-    height: 150px;
-    
-}
-
 
 
 #legend {
     width: 220px;
-	height: 150px;
+    height: 150px;
     margin:inherit;
     background-color:rgba(255,255,255, 0.6);
  
 }
+
+#random_choice {
+    font-family: 'Helvetica Neue', Helvetica;
+    font-size: 18px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

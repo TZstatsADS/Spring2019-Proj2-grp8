@@ -306,7 +306,7 @@ function(input, output) {
         }
       }
       
-      #roll the dice for random choice
+      # random choice
       
       
       output$locationin<-renderText(input$location)
@@ -317,8 +317,7 @@ function(input, output) {
         choice2<-choice[index[2]]
         index[3]<-length(choice)
         choice3<-choice[index[3]]
-        output$c1<- renderText({choice1})
-        output$c2<- renderText({choice2})
+        
         
         data_candidate<-all_data[c(choice1,choice2,choice3)]
         
@@ -326,9 +325,24 @@ function(input, output) {
         data_select<-lapply(data_candidate,get_candidate,Lon0=long,Lat0=lat,r=input$distance*1000)
         
         targetplan<-lapply(data_select,randomchoice)
-        output$target1<-renderText(as.character(targetplan[[1]][1,"NAME"]))
-        output$target2<-renderText(as.character(targetplan[[2]][1,"NAME"]))
-        output$target3<-renderText(as.character(targetplan[[3]][1,"NAME"]))
+        target1 <- as.character(targetplan[[1]][1,"NAME"])
+        target2 <- as.character(targetplan[[2]][1,"NAME"])
+        target3 <- as.character(targetplan[[3]][1,"NAME"])
+        
+        output$msg1 = renderText({
+          paste("Interested in ", {choice1}, " and ", {choice2}, "? ", sep="")
+        })
+        
+        output$msg2 = renderText({
+          paste("Why not spend your morning in ", {target1}, ", enjoy the lunch at ",
+                {target3}, ", and finish your day at ", {target2}, "?", sep="")
+        })
+        
+        output$msg3 = renderText({
+          paste("Click the icons on the map for more information. Not satisfied? Click
+                Feeling Lucky again!", sep="")
+        })
+        
         
         leafletProxy("map")%>%
           clearMarkerClusters()

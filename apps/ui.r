@@ -30,7 +30,7 @@ ui <- dashboardPage(skin = "yellow",
                     ),
                     dashboardBody(
                       tags$head(
-                        tags$link(rel = "stylesheet", type = "text/css", href = "stylecssMouseExp.css")
+                        tags$link(rel = "stylesheet", type = "text/css", href = "style.css")
                       ),
                       tabItems(
                         
@@ -44,7 +44,7 @@ ui <- dashboardPage(skin = "yellow",
                                 
                                 tags$head(
                                   # Include our custom CSS
-                                  includeCSS("www/styles.css"),
+                                  includeCSS("www/page1.css"),
                                   includeScript("www/click_hover.js")
                                   
                                 ),
@@ -135,35 +135,43 @@ ui <- dashboardPage(skin = "yellow",
                         
                         # Second tab content
                         tabItem(tabName = "Page_3",
-                                titlePanel("Plan your day (need more text description)"),
+                                tags$head(
+                                  tags$link(rel = "stylesheet", type = "text/css", href = "style.css")
+                                ),
                                 
+                                div(id="pg3_header",
+                                    titlePanel("No idea at all?"),
+                                    h4("Just tell us where you are and how far you want to travel. We'll make a perfect plan for your day!")
+                                ),
+                              
                                 
                                 mainPanel(
                                   column(6,
                                          fluidRow(
                                            column(8,
                                           
-                                           #helpText("Pleae enter your location"),
-                                           textInput("location",placeholder = "Enter your location",label = NULL, width = "400px")),
+                                           textInput("location",placeholder = "Enter Your Location",label = NULL, width = "400px")),
                                            column(4,
-                                                  #style = "margin-top:25px",
-                                                  actionButton("submit","Confirm",icon("map-marker"), width  ="100px"))
+                                                  
+                                                  div(id="confirm", actionButton("submit","Confirm",icon("map-marker"), width  ="100px")))
                                          ),
                                          
                                          br(),p(),
                                          sliderInput("distance", "Please choose distance from you (in km):", min = 0, max = 20, value = 1, step= 0.1, width = "500px"),
-                                         br(),p(),
+                                         br(),
                                          actionButton("submit4", label="Feeling Lucky!",style="opacity:0.9",align="left"),
                                          br(),p(),br(),p(),
                                          verbatimTextOutput("errorput"),
-                                         verbatimTextOutput("c1"),
-                                         verbatimTextOutput("c2"),
-                                         verbatimTextOutput("target1"),
-                                         verbatimTextOutput("target3"),
-                                         verbatimTextOutput("target2")
+                                         
+                                         div(id = "random_choice", 
+                                             textOutput("msg1"),br(),
+                                             textOutput("msg2"),br(),
+                                             textOutput("msg3")
+                                             )
+                                         
                                          ),
                                   column(6,
-                                         leafletOutput("map",width = "200%", height = 550),
+                                         leafletOutput("map",width = "200%", height = 600),
                                          conditionalPanel('input.submit4 >0 && input.submit > 0',
                                                           absolutePanel(id="legend",
                                                                         class = "panel panel-default",
