@@ -23,9 +23,9 @@ ui <- dashboardPage(skin = "yellow",
                     dashboardSidebar(
                       sidebarMenu(
                         id="tabs",
-                        menuItem("Welcome",tabName = "Page_1",icon = icon("book")),
-                        menuItem("Search", tabName = "Page_2",icon = icon("dashboard")),
-                        menuItem("Feeling Lucky", tabName = "Page_3",icon = icon("cogs"))
+                        menuItem("Welcome",tabName = "Page_1",icon = icon("home")),
+                        menuItem("Search", tabName = "Page_2",icon = icon("search-plus")),
+                        menuItem("Feeling Lucky", tabName = "Page_3",icon = icon("surprise"))
                       )
                     ),
                     dashboardBody(
