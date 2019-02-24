@@ -1,5 +1,7 @@
 library(geosphere)
 library(ggmap)
+library(maptools)
+library(leaflet)
 
 restaurant<-read.csv("../output/restaurant_final.csv")
 type <- unique(as.character(restaurant$CUISINE))
@@ -14,8 +16,8 @@ load("../output/sub.station.RData")
 load("../output/bus.stop.RData")
 source("../lib/global.R")
 # Define a server for the Shiny app
-all_data1 = list(museum = museum,theatre = theatre, restaurant = restaurant)
-namedata1 = c('museum','theatre','restaurant')
+#all_data1 = list(museum = museum,theatre = theatre, restaurant = restaurant)
+#namedata1 = c('museum','theatre','restaurant')
 function(input, output) {
   
   
@@ -34,37 +36,24 @@ function(input, output) {
     
   })
   ###map
-   output$map1 <- renderLeaflet({
-    
-    map <- leaflet() %>%addProviderTiles('Esri.WorldTopoMap') %>%
-      setView(-73.983,40.7639,zoom = 13)
-    
-    for (i in 1:length(namedata1)){
-      leafletProxy('map1',data=all_data[[namedata1[i]]]) %>%
-        addMarkers(
-          
-          clusterOptions = markerClusterOptions(),
-          lng=all_data1[[namedata1[i]]]$LON,
-          lat=all_data1[[namedata1[i]]]$LAT,
-          group=namedata1[i] )
-      print(head(all_data1[[namedata1[i]]]$LON))
-      print(head(all_data1[[namedata1[i]]]$LAT))
-    }
-    map%>%hideGroup(c('museum','theatre'))
-    
-     Type<-as.character(unique(restaurant$TYPE))
-     Group<-c('American', 'Asian', 'Chinese' ,'Dessert', 'European', 'French','Italian', 'Mexcian' ,'Other', 'QuickMeal' , 'Seafood')
-     for (i in 1:11){
-       leafletProxy("map1") %>%
-         addMarkers(
-           data=Restaurant[Restaurant$TYPE==Type[i],],
-           clusterOptions = markerClusterOptions(),
-           lng=Restaurant[Restaurant$TYPE==Type[i],]$LON,lat=Restaurant[Restaurant$TYPE==Type[i],]$LAT,
-           group=Group[i] )
-     }
-     map%>%hideGroup(c('American', 'Asian', 'Chinese' ,'Dessert', 'European', 'French','Italian', 'Mexcian' ,'Other', 'QuickMeal' , 'Seafood'))
-
-    })
+  output$map1 <- renderLeaflet({
+    leaflet() %>%
+      addProviderTiles('Esri.WorldTopoMap') %>%
+      setView(lng = -73.971035, lat = 40.775659, zoom = 12) %>%
+      addMarkers(data=restaurant,
+                 lng=restaurant$LON,
+                 lat=restaurant$LAT,
+                 clusterOptions=markerClusterOptions(),
+                 icon=list(iconUrl=paste('icon/',"Restaurant",'.png',sep = ""),iconSize=c(20,20)),
+                 popup=paste("Name:",a(restaurant$NAME, href = restaurant$URL),"<br/>",
+                             "Tel:",restaurant$TEL,"<br/>",
+                             "Price:",restaurant$PRICE,"<br/>",
+                             "Rating:",restaurant$RATING,"<br/>",
+                             "GRADE:",restaurant$GRADE,"<br/>",
+                             "Address:",restaurant$ADDRESS),
+                 group="housing_cluster"
+      )
+  })
   
   observeEvent(input$region1,{
     leafletProxy("map1") %>%
@@ -96,74 +85,79 @@ function(input, output) {
     print(input$type1)
   })
   
-  # observe({
-  #   
-  #   housing_sort=marksInBounds()
-  #   
-  #   if(nrow(housing_sort)!=0){
-  #     
-  #     action=apply(housing_sort,1,function(r){
-  #       addr=r["addr"]
-  #       lat=r["lat"]
-  #       lng=r["lng"]
-  #       paste0("<a class='go-map' href='' data-lat='",lat,"'data-lng='",lng,"'>",addr,'</a>')   
-  #     }
-  #     )
-  #     
-  #     housing_sort$addr=action
-  #     output$rank <- renderDataTable(housing_sort[,c("addr","price","bedrooms","bathrooms")],escape=FALSE)
-  #     
-  #     
-  #     
-  #     
-  #   }
-  #   else{
-  #     
-  #     output$rank=renderDataTable(housing_sort[,c("addr","price","bedrooms","bathrooms")])
-  #   }
-  # })
-  # 
+ # showStatus = reactive({
+#    if (is.null(input$map_bounds)){
+#      return ("1")
+#    } else {
+#      if (input$map_zoom<16){
+#        return ("2")
+#      } else {
+#        return ("3")
+#      }
+#    }
+#  })
   
-  # Fill in the spot we created for a plot
-  output$table1 <- renderDataTable({
-
-    if (input$region1 == 'Museums'){
-      print(Museum[,1:3])
-
-    }
-    else if(input$region1 == 'Theatre'){
-      print(Theatre)
-
-    }
-    else if(input$region1 == 'Restaurant') {
-      if (input$type1 == 'ALL'){
-        print(restaurant)
-      }
-      else{
-        print(restaurant[restaurant$CUISINE == as.character(input$type1),])
-      }
-
-    }
-    })
-   output$table2 <- renderDataTable({
+  # get the museum data in the bounds
+  MuseumInBounds <- reactive({
+    if (is.null(input$map1_bounds))
+      return(Museum[FALSE,])
+    bounds <- input$map1_bounds
+    latRng <- range(bounds$north, bounds$south)
+    lngRng <- range(bounds$east, bounds$west)
     
-    if (input$region2 == 'Museums'){
-      print(Museum[,1:3])
-      
-    }
-    else if(input$region2 == 'Theatre'){
-      print(Theatre)
-      
-    }
-    else if(input$region2 == 'Restaurant') {
-      if (input$type1 == 'ALL'){
-        print(restaurant)
-      }
-      else{
-        print(restaurant[restaurant$CUISINE == as.character(input$type1),])
-      }      
-    }
+    return(
+      subset(Museum,
+             LAT>= latRng[1] & LAT <= latRng[2] &
+               LON >= lngRng[1] & LON <= lngRng[2])
+    )
   })
+  
+  #subset museum
+  observe({
+    museum_subset = MuseumInBounds()
+    
+    if (nrow(museum_subset) != 0){
+      Museum = museum_subset
+    }
+    output$table1 <- renderDataTable({
+      
+      if (input$region1 == 'Museums'){
+        print(Museum[,1:3])
+        
+      }
+      else if(input$region1 == 'Theatre'){
+        print(Theatre)
+        
+      }
+      else if(input$region1 == 'Restaurant') {
+        if (input$type1 == 'ALL'){
+          print(restaurant)
+        }
+        else{
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
+        }
+        
+      }
+    }) 
+    output$table2 <- renderDataTable({
+      
+      if (input$region2 == 'Museums'){
+        print(Museum[,1:3])
+        
+      }
+      else if(input$region2 == 'Theatre'){
+        print(Theatre)
+        
+      }
+      else if(input$region2 == 'Restaurant') {
+        if (input$type1 == 'ALL'){
+          print(restaurant)
+        }
+        else{
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
+        }      
+      }
+    })
     output$table3 <- renderDataTable({
       
       if (input$region3 == 'Museums'){
@@ -183,6 +177,234 @@ function(input, output) {
         }        
       }
     })
+    })
+  
+  # get the theatre data in the bounds
+  TheatreInBounds <- reactive({
+    if (is.null(input$map1_bounds))
+      return(Theatre[FALSE,])
+    bounds <- input$map1_bounds
+    latRng <- range(bounds$north, bounds$south)
+    lngRng <- range(bounds$east, bounds$west)
+    
+    return(
+      subset(Theatre,
+             LAT>= latRng[1] & LAT <= latRng[2] &
+               LON >= lngRng[1] & LON <= lngRng[2])
+    )
+  })
+  
+  #subset theatre
+  observe({
+    theatre_subset = TheatreInBounds()
+    
+    if (nrow(theatre_subset) != 0){
+      Theatre = theatre_subset
+    }
+    output$table1 <- renderDataTable({
+      
+      if (input$region1 == 'Museums'){
+        print(Museum[,1:3])
+        
+      }
+      else if(input$region1 == 'Theatre'){
+        print(Theatre)
+        
+      }
+      else if(input$region1 == 'Restaurant') {
+        if (input$type1 == 'ALL'){
+          print(restaurant)
+        }
+        else{
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
+        }
+        
+      }
+    }) 
+    output$table2 <- renderDataTable({
+      
+      if (input$region2 == 'Museums'){
+        print(Museum[,1:3])
+        
+      }
+      else if(input$region2 == 'Theatre'){
+        print(Theatre)
+        
+      }
+      else if(input$region2 == 'Restaurant') {
+        if (input$type1 == 'ALL'){
+          print(restaurant)
+        }
+        else{
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
+        }      
+      }
+    })
+    output$table3 <- renderDataTable({
+      
+      if (input$region3 == 'Museums'){
+        print(Museum[,1:3])
+        
+      }
+      else if(input$region3 == 'Theatre'){
+        print(Theatre)
+        
+      }
+      else if(input$region3 == 'Restaurant') {
+        if (input$type1 == 'ALL'){
+          print(restaurant)
+        }
+        else{
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
+        }        
+      }
+    })
+  })
+  
+  # get the restaurant data in the bounds
+  RestaurantInBounds <- reactive({
+    if (is.null(input$map1_bounds))
+      return(restaurant[FALSE,])
+    bounds <- input$map1_bounds
+    latRng <- range(bounds$north, bounds$south)
+    lngRng <- range(bounds$east, bounds$west)
+    
+    return(
+      subset(restaurant,
+             LAT>= latRng[1] & LAT <= latRng[2] &
+               LON >= lngRng[1] & LON <= lngRng[2])
+    )
+  })
+  
+  #subset restaurant
+  observe({
+    restaurant_subset = RestaurantInBounds()
+    
+    if (nrow(restaurant_subset) != 0){
+      Restaurant = restaurant_subset
+    }
+    output$table1 <- renderDataTable({
+      
+      if (input$region1 == 'Museums'){
+        print(Museum[,1:3])
+        
+      }
+      else if(input$region1 == 'Theatre'){
+        print(Theatre)
+        
+      }
+      else if(input$region1 == 'Restaurant') {
+        if (input$type1 == 'ALL'){
+          print(restaurant)
+        }
+        else{
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
+        }
+        
+      }
+    }) 
+    output$table2 <- renderDataTable({
+      
+      if (input$region2 == 'Museums'){
+        print(Museum[,1:3])
+        
+      }
+      else if(input$region2 == 'Theatre'){
+        print(Theatre)
+        
+      }
+      else if(input$region2 == 'Restaurant') {
+        if (input$type1 == 'ALL'){
+          print(restaurant)
+        }
+        else{
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
+        }      
+      }
+    })
+    output$table3 <- renderDataTable({
+      
+      if (input$region3 == 'Museums'){
+        print(Museum[,1:3])
+        
+      }
+      else if(input$region3 == 'Theatre'){
+        print(Theatre)
+        
+      }
+      else if(input$region3 == 'Restaurant') {
+        if (input$type1 == 'ALL'){
+          print(restaurant)
+        }
+        else{
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),])
+        }        
+      }
+    })
+  })
+  
+
+  
+ 
+  # Fill in the spot we created for a plot
+  # output$table1 <- renderDataTable({
+  # 
+  #   if (input$region1 == 'Museums'){
+  #     print(Museum[,1:3])
+  # 
+  #   }
+  #   else if(input$region1 == 'Theatre'){
+  #     print(Theatre)
+  # 
+  #   }
+  #   else if(input$region1 == 'Restaurant') {
+  #     if (input$type1 == 'ALL'){
+  #       print(restaurant)
+  #     }
+  #     else{
+  #       print(restaurant[restaurant$CUISINE == as.character(input$type1),])
+  #     }
+  # 
+  #   }
+  #   })
+  # output$table2 <- renderDataTable({
+  #  
+  #  if (input$region2 == 'Museums'){
+  #    print(Museum[,1:3])
+  #    
+  #  }
+  #  else if(input$region2 == 'Theatre'){
+  #    print(Theatre)
+  #    
+  #  }
+  #  else if(input$region2 == 'Restaurant') {
+  #    if (input$type1 == 'ALL'){
+  #      print(restaurant)
+  #    }
+  #    else{
+  #      print(restaurant[restaurant$CUISINE == as.character(input$type1),])
+  #    }      
+  #  }
+  #})
+  #  output$table3 <- renderDataTable({
+  #    
+  #    if (input$region3 == 'Museums'){
+  #      print(Museum[,1:3])
+  #      
+  #    }
+  #    else if(input$region3 == 'Theatre'){
+  #      print(Theatre)
+  #      
+  #    }
+  #    else if(input$region3 == 'Restaurant') {
+  #      if (input$type1 == 'ALL'){
+  #        print(restaurant)
+  #     }
+  #      else{
+  #        print(restaurant[restaurant$CUISINE == as.character(input$type1),])
+  #      }        
+  #    }
+  #  })
     
     observeEvent(input$submit,{
       if(input$location=="Current Location"){

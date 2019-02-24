@@ -80,7 +80,7 @@ ui <- dashboardPage(skin = "yellow",
                                 mainPanel(
                                   fluidRow(
                                     column(8,
-                                           style = "width:500px;display:inline-block;margin-right:0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
+                                           #style = "width:500px;display:inline-block;margin-right:0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
                                            tabsetPanel(type = "tabs",
                                                        tabPanel("Choice 1", dataTableOutput("table1")),
                                                        tabPanel("Choice 2", dataTableOutput("table2")),
@@ -90,6 +90,7 @@ ui <- dashboardPage(skin = "yellow",
                                     
                                     column(width = 4,
                                            leafletOutput("map1", width = "260%", height = 550)
+                                          
                                            
                                     )
                                   )
