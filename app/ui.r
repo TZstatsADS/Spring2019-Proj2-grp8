@@ -25,7 +25,7 @@ ui <- dashboardPage(skin = "yellow",
                         id="tabs",
                         menuItem("Welcome",tabName = "Page_1",icon = icon("home")),
                         menuItem("Search", tabName = "Page_2",icon = icon("search-plus")),
-                        menuItem("Feeling Lucky", tabName = "Page_3",icon = icon("surprise"))
+                        menuItem("Feeling Lucky", tabName = "Page_3",icon = icon("laugh-wink"))
                       )
                     ),
                     dashboardBody(
