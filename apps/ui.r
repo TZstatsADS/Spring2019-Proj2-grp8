@@ -138,51 +138,53 @@ ui <- dashboardPage(skin = "yellow",
                                 titlePanel("Plan your day (need more text description)"),
                                 
                                 
-                                
-                                
-                                
-                                
-                                
-                                # Sidebar with a slider input for number of bins 
-                                sidebarLayout(
-                                  sidebarPanel(id="control1",fixed = T,draggable = T,class = "panel panel-default",top = 80,
-                                               
-                                               left = 55, right = "auto", bottom = "auto",
-                                               
-                                               width = 280, height = 550,
-                                               
-                                               textInput("location",label = h4("Enter Your Location"),"Current Location", width = "200px"),
-                                               actionButton("submit","Mark Your Location",icon("map-marker"), width  ="200px"),
-                                               sliderInput("distance", "Distance From You (in km)", min = 0, max = 20, value = 1, step= 0.1, width = "200px"),
-                                               actionButton("submit4", label="Go!",style="opacity:0.8",align="left")
-                                           
-                                  ),
-                                  
-                                  
-                                  # Show a plot of the generated distribution
-                                  mainPanel(
-                                    verbatimTextOutput("errorput"),
-                                    column(4,verbatimTextOutput("c1"),
-                                           verbatimTextOutput("c2"),
-                                           
-                                           verbatimTextOutput("target1"),
-                                           verbatimTextOutput("target3"),
-                                           verbatimTextOutput("target2")),
-                                    column(8,leafletOutput("map",width = "160%", height = 400),
-                                           conditionalPanel('input.submit4 >0 && input.submit > 0',
-                                                            absolutePanel(id="legend",
-                                                                          class = "panel panel-default",
+                                mainPanel(
+                                  column(6,
+                                         fluidRow(
+                                           column(6,
+                                           #helpText("Pleae enter your location"),
+                                           textInput("location","Pleae enter your current location", width = "250px")),
+                                           column(6,
+                                                  style = "margin-top:25px",
+                                                  actionButton("submit","Confirm Your Location",icon("map-marker"), width  ="200px"))
+                                         ),
+                                         
+                                         br(),p(),
+                                         sliderInput("distance", "Please choose distance from you (in km)", min = 0, max = 20, value = 1, step= 0.1, width = "500px"),
+                                         br(),p(),
+                                         actionButton("submit4", label="Not for you? Try Again!",style="opacity:0.8",align="left"),
+                                         br(),p(),br(),p(),
+                                         verbatimTextOutput("errorput"),
+                                         verbatimTextOutput("c1"),
+                                                verbatimTextOutput("c2"),
+                                                
+                                                verbatimTextOutput("target1"),
+                                                verbatimTextOutput("target3"),
+                                                verbatimTextOutput("target2")
+                                         ),
+                                  column(6,
+                                         leafletOutput("map",width = "160%", height = 550),
+                                         conditionalPanel('input.submit4 >0 && input.submit > 0',
+                                                          absolutePanel(id="legend",
+                                                                        class = "panel panel-default",
                                                                         
-                                                                         
-                                                                          top = 0, left = "auto", right = -278, bottom = "auto",
-                                                                          width = 100, height = 150,
-                                                                          
-                                                                          h5("Select Features"),
-                                                                          checkboxInput("Bus", label = "Bus",value= FALSE),
-                                                                          checkboxInput("Subway",label="Subway",value = FALSE))
-                                                            
-                                                            
-                                           )
+                                                                        
+                                                                        top = 0, left = "auto", right = -278, bottom = "auto",
+                                                                        width = 100, height = 150,
+                                                                        
+                                                                        h5("Select Features"),
+                                                                        checkboxInput("Bus", label = "Bus",value= FALSE),
+                                                                        checkboxInput("Subway",label="Subway",value = FALSE)
+                                         )
+                                )
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                              
                                            
                                            
                                            )
@@ -195,7 +197,7 @@ ui <- dashboardPage(skin = "yellow",
                                 )
                         )
                       )
-)
+
 
 
 
