@@ -19,13 +19,13 @@ restaurant<- read.csv('../output/restaurant_final.csv')
 type <- unique(as.character(restaurant$CUISINE))
 
 ui <- dashboardPage(skin = "yellow",
-                    dashboardHeader(title= "Travel Suggestion"),
+                    dashboardHeader(title= "Day Planner"),
                     dashboardSidebar(
                       sidebarMenu(
                         id="tabs",
-                        menuItem("Page1",tabName = "Page_1",icon = icon("book")),
-                        menuItem("Page2", tabName = "Page_2",icon = icon("dashboard")),
-                        menuItem("Page3", tabName = "Page_3",icon = icon("cogs"))
+                        menuItem("Welcome",tabName = "Page_1",icon = icon("book")),
+                        menuItem("Search", tabName = "Page_2",icon = icon("dashboard")),
+                        menuItem("Feeling Lucky", tabName = "Page_3",icon = icon("cogs"))
                       )
                     ),
                     dashboardBody(

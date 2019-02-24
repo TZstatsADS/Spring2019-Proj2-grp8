@@ -1,0 +1,23 @@
+.popover-title {
+color: orange;
+font-size: 15px;
+}
+.popover-content {
+color: black;
+font-size: 15px;
+background-color:white;
+}
+
+.main-header .logo {
+  font-family: "Georgia", Times, "Times New Roman", serif;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.skin-yellow .main-header .logo {
+          background-color: #F19B2C;
+        }
+
+.skin-yellow .main-header .logo:hover {
+  background-color: #F19B2C;
+}
