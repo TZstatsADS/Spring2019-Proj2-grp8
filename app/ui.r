@@ -40,10 +40,45 @@ ui <- dashboardPage(skin = "yellow",
                                 
                               
                            
+                                div(class = "Page_1",
+                                
+                                tags$head(
+                                  # Include our custom CSS
+                                  includeCSS("www/styles.css"),
+                                  includeScript("www/click_hover.js")
+                                  
+                                ),
+                                
+                                align="center",
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                h1("Your Travel Suggestions in Manhattan",style="color:white;font-family: Times New Roman;font-size: 300%;font-weight: bold;"),
+                                br(),
+                                br(),
+                                br(),
+                                h3("Gourp 8 - Spring 2019",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;"),
+                                br()
                                 
                                 
-                                div(style = "text-align:center",
-                                    bsButton("nextbutton", "Explore", icon("wpexplorer"), size = "large",style = "warning"))
+                                
+                                
+                                
+                        )
                                 
                         ),
                         
