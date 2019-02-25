@@ -5,7 +5,7 @@ library(leaflet)
 
 restaurant<-read.csv("../output/restaurant_final.csv")
 type <- unique(as.character(restaurant$CUISINE))
-namedata<-c("Museum","Theatre","Gallery","Library")
+namedata<-c("Museum","Theatre","Gallery","Library",",Restaurant")
 Gallery<-na.omit(read.csv("../output/Gallery.csv",header=T))
 Library<-na.omit(read.csv("../output/Library.csv",header=T))
 Museum<-na.omit(read.csv("../output/Museum.csv",header=T))
