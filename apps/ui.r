@@ -88,15 +88,15 @@ ui <- dashboardPage(skin = "yellow",
                                 fluidRow(
                                   column(width = 1,
                                          style = "width:150px;display:inline-block;margin-right: 20px;margin-bottom:0px;margin-top:0px;padding-right:0px",
-                                         selectInput("region1", "Choice 1:", choices=c(choices=c("Restaurant","Museum","Theatre","Gallery","Library"))
+                                         selectInput("region1", "Choice 1:", choices=c(choices=c("Restaurant","Museum","Theatre","Gallery","Library")))
                                   ),
                                   column(width = 1,
                                          style = "width:150px;display:inline-block;margin-right: 0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
-                                         selectInput("region2", "Choice 2:", choices=c('NA',choices=c("Restaurant","Museum","Theatre","Gallery","Library"))
+                                         selectInput("region2", "Choice 2:", choices=c('NA',choices=c("Restaurant","Museum","Theatre","Gallery","Library")))
                                   ),
                                   column(width = 1,
                                          style = "width:150px;display:inline-block;margin-right: 0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
-                                         selectInput("region3", "Choice 3:", choices=c('NA',choices=c("Restaurant","Museum","Theatre","Gallery","Library"))
+                                         selectInput("region3", "Choice 3:", choices=c('NA',choices=c("Restaurant","Museum","Theatre","Gallery","Library")))
                                   ),
                                   column(width = 1,
                                          style = "width:150px;display:inline-block;margin-right: 0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
