@@ -98,6 +98,7 @@ function(input, output) {
         showGroup(c(input$type1))}
   })
   
+  
  # showStatus = reactive({
 #    if (is.null(input$map_bounds)){
 #      return ("1")
