@@ -388,7 +388,7 @@ function(input, output) {
           
           if(p==TRUE){
             proxy %>% 
-              addMarkers(data=sub.station, ~lng, ~lat,label = ~info,icon=icons(
+              addMarkers(data=subway, ~lng, ~lat,label = ~info,icon=icons(
                 iconUrl = "icon/icons8-Bus-48.png",
                 iconWidth = 10, iconHeight = 10),group="subway")
           }
@@ -403,11 +403,11 @@ function(input, output) {
           
           if(p==TRUE){
             proxy %>% 
-              addMarkers(data=bus.stop, ~lng, ~lat,label = ~info,icon=icons(
+              addMarkers(data=bus, ~lng, ~lat,label = ~info,icon=icons(
                 iconUrl = "icon/bus.png",
-                iconWidth =10, iconHeight = 10),layerId=as.character(bus.stop$info))
+                iconWidth =10, iconHeight = 10),layerId=as.character(bus$info))
           }
-          else proxy%>%removeMarker(layerId=as.character(bus.stop$info))
+          else proxy%>%removeMarker(layerId=as.character(bus$info))
           
         })
         

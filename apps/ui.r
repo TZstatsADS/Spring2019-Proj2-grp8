@@ -150,7 +150,7 @@ ui <- dashboardPage(skin = "yellow",
                                          fluidRow(
                                            column(8,
                                           
-                                           textInput("location",placeholder = "Enter Your Location",label = NULL, width = "400px")),
+                                           textInput("location",placeholder = "Enter Your Location",label = NULL, value="Current Location",width = "400px")),
                                            column(4,
                                                   
                                                   div(id="confirm", actionButton("submit","Confirm",icon("map-marker"), width  ="100px")))
