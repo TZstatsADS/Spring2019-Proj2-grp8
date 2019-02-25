@@ -229,11 +229,11 @@ function(input, output) {
           print(restaurant[restaurant$CUISINE == as.character(input$type1),])
         }        
       }
-    })
-    },
-      options = list(
+    },options = list(
         scrollX=T,
         pageLength = 3))
+    }
+      )
  
   # Fill in the spot we created for a plot
   # output$table1 <- renderDataTable({
