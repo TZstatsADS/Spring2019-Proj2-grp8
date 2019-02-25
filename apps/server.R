@@ -2,10 +2,10 @@ library(geosphere)
 library(ggmap)
 library(maptools)
 library(leaflet)
-
-restaurant<-read.csv("../output/restaurant_final.csv")
+library(readr)
+restaurant<-data.frame(na.omit(read_csv("../output/restaurant_final.csv")))
 type <- unique(as.character(restaurant$CUISINE))
-namedata<-c("Museum","Theatre","Gallery","Library",",Restaurant")
+namedata<-c("Restaurant","Museum","Theatre","Gallery","Library")
 Gallery<-na.omit(read.csv("../output/Gallery.csv",header=T))
 Library<-na.omit(read.csv("../output/Library.csv",header=T))
 Museum<-na.omit(read.csv("../output/Museum.csv",header=T))
@@ -15,16 +15,17 @@ register_google("AIzaSyA8OuCvy04PC3N-K9y6DdEc32hUpNyUrl8")
 load("../output/sub.station.RData")
 load("../output/bus.stop.RData")
 source("../lib/global.R")
-Group <- c("Chinese","American","European","QuickMeal","Latin","Other","Asian",    
-           "Pizza","Coffee","Drink&Sweets")
 # Define a server for the Shiny app
 #all_data1 = list(museum = museum,theatre = theatre, restaurant = restaurant)
 #namedata1 = c('museum','theatre','restaurant')
+Group <- c("Chinese","American","European","QuickMeal","Latin","Other","Asian",    
+           "Pizza","Coffee","Drink&Sweets")
 function(input, output) {
   
   
   #################Clear Choices############
-   observeEvent(input$button2,{
+  #################Clear Choices############
+  observeEvent(input$button2,{
     proxy<-leafletProxy("map1")
     proxy %>%
       setView(lng = -73.971035, lat = 40.775659, zoom = 12) 
@@ -97,7 +98,6 @@ function(input, output) {
         hideGroup(c(namedata))%>%
         showGroup(c(input$type1))}
   })
-  
   
  # showStatus = reactive({
 #    if (is.null(input$map_bounds)){
