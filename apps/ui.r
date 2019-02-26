@@ -18,7 +18,8 @@ library(ggmap)
 restaurant<- read.csv('../output/restaurant_final.csv')
 type <- unique(as.character(restaurant$CUISINE))
 
-ui <- dashboardPage(skin = "yellow",
+ui <- dashboardPage(
+  skin = "yellow",
                     dashboardHeader(title= "Day Planner"),
                     dashboardSidebar(
                       sidebarMenu(
@@ -146,6 +147,7 @@ ui <- dashboardPage(skin = "yellow",
                               
                                 
                                 mainPanel(
+                                  useShinyalert(),
                                   column(6,
                                          fluidRow(
                                            column(8,
@@ -161,7 +163,6 @@ ui <- dashboardPage(skin = "yellow",
                                          br(),
                                          actionButton("submit4", label="Feeling Lucky!",style="opacity:0.9",align="left"),
                                          br(),p(),br(),p(),
-                                         verbatimTextOutput("errorput"),
                                          
                                          div(id = "random_choice", 
                                              textOutput("msg1"),br(),

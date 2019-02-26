@@ -3,6 +3,7 @@ library(ggmap)
 library(maptools)
 library(leaflet)
 library(readr)
+library(shinyalert)
 restaurant<-data.frame(na.omit(read_csv("../output/restaurant_final.csv")))
 type <- unique(as.character(restaurant$CUISINE))
 namedata<-c("Restaurant","Museum","Theatre","Gallery","Library")
@@ -48,6 +49,11 @@ function(input, output) {
           clusterOptions = markerClusterOptions(),
           lng=all_data[[namedata[i]]]$LON,
           lat=all_data[[namedata[i]]]$LAT,
+          icon=list(iconUrl=paste('icon/',namedata[i],'.png',sep = ""),iconSize=c(20,20)),
+          popup=paste("Name:",a(all_data[[namedata[i]]]$NAME,href = all_data[[namedata[i]]]$URL),"<br/>",
+                      "Tel:",all_data[[namedata[i]]]$TEL,"<br/>",
+                      "Zipcode:",all_data[[namedata[i]]]$ZIP,"<br/>",
+                      "Address:",all_data[[namedata[i]]]$ADDRESS),
           group=namedata[i])
 
     }
@@ -61,6 +67,15 @@ function(input, output) {
           data=restaurant[restaurant$CUISINE==Type[i],],
           clusterOptions = markerClusterOptions(),
           lng=restaurant[restaurant$CUISINE==Type[i],]$LON,lat=restaurant[restaurant$CUISINE==Type[i],]$LAT,
+          icon=list(iconUrl=paste('icon/','Restaurant','.png',sep = ""),iconSize=c(20,20)),
+          popup=paste("Name:",a(restaurant$NAME,href = all_data[[namedata[i]]]$URL),"<br/>",
+                      "Tel:",restaurant$TEL,"<br/>",
+                      "Rating:",restaurant$RATING,"<br/>",
+                      "Price:",restaurant$PRICE,"<br/>",
+                      "Cuisine:",restaurant$CUISINE,"<br/>",
+                      "Address:",restaurant$ADDRESS,"<br/>",
+                      "Grade:",restaurant$GRADE,"<br/>"
+                      ),
           group=Group[i] )
 
     }
@@ -126,6 +141,34 @@ function(input, output) {
     )
   })
   
+  # get the gallery data in the bounds
+  GalleryInBounds <- reactive({
+    if (is.null(input$map1_bounds))
+      return(Gallery[FALSE,])
+    bounds <- input$map1_bounds
+    latRng <- range(bounds$north, bounds$south)
+    lngRng <- range(bounds$east, bounds$west)
+    
+    return(
+      subset(Gallery,
+             LAT>= latRng[1] & LAT <= latRng[2] &
+               LON >= lngRng[1] & LON <= lngRng[2])
+    )
+  })
+  # get the library data in the bounds
+  LibraryInBounds <- reactive({
+    if (is.null(input$map1_bounds))
+      return(Library[FALSE,])
+    bounds <- input$map1_bounds
+    latRng <- range(bounds$north, bounds$south)
+    lngRng <- range(bounds$east, bounds$west)
+    
+    return(
+      subset(Library,
+             LAT>= latRng[1] & LAT <= latRng[2] &
+               LON >= lngRng[1] & LON <= lngRng[2])
+    )
+  })
   # get the theatre data in the bounds
   TheatreInBounds <- reactive({
     if (is.null(input$map1_bounds))
@@ -161,6 +204,8 @@ function(input, output) {
     museum_subset = MuseumInBounds()
     theatre_subset = TheatreInBounds()
     restaurant_subset = RestaurantInBounds()
+    library_subset=LibraryInBounds()
+    gallery_subset=GalleryInBounds()
     
     if (nrow(museum_subset) != 0){
       Museum = museum_subset
@@ -253,65 +298,6 @@ function(input, output) {
     }
       )
  
-  # Fill in the spot we created for a plot
-  # output$table1 <- renderDataTable({
-  # 
-  #   if (input$region1 == 'Museums'){
-  #     print(Museum[,1:3])
-  # 
-  #   }
-  #   else if(input$region1 == 'Theatre'){
-  #     print(Theatre)
-  # 
-  #   }
-  #   else if(input$region1 == 'Restaurant') {
-  #     if (input$type1 == 'ALL'){
-  #       print(restaurant)
-  #     }
-  #     else{
-  #       print(restaurant[restaurant$CUISINE == as.character(input$type1),])
-  #     }
-  # 
-  #   }
-  #   })
-  # output$table2 <- renderDataTable({
-  #  
-  #  if (input$region2 == 'Museums'){
-  #    print(Museum[,1:3])
-  #    
-  #  }
-  #  else if(input$region2 == 'Theatre'){
-  #    print(Theatre)
-  #    
-  #  }
-  #  else if(input$region2 == 'Restaurant') {
-  #    if (input$type1 == 'ALL'){
-  #      print(restaurant)
-  #    }
-  #    else{
-  #      print(restaurant[restaurant$CUISINE == as.character(input$type1),])
-  #    }      
-  #  }
-  #})
-  #  output$table3 <- renderDataTable({
-  #    
-  #    if (input$region3 == 'Museums'){
-  #      print(Museum[,1:3])
-  #      
-  #    }
-  #    else if(input$region3 == 'Theatre'){
-  #      print(Theatre)
-  #      
-  #    }
-  #    else if(input$region3 == 'Restaurant') {
-  #      if (input$type1 == 'ALL'){
-  #        print(restaurant)
-  #     }
-  #      else{
-  #        print(restaurant[restaurant$CUISINE == as.character(input$type1),])
-  #      }        
-  #    }
-  #  })
     
     observeEvent(input$submit,{
       if(input$location=="Current Location"){
@@ -336,7 +322,7 @@ function(input, output) {
         lat<-as.numeric(coord[2])
         long<-as.numeric(coord[1])
         if(is.na(lat)&is.na(long)){ 
-          output$errorput<-renderText("Please enter a valid address")
+          shinyalert("Please enter a valid Address!",type="error")
         }else{
           output$map<-renderLeaflet(
             {    map<-leaflet() %>%  addTiles()%>%
@@ -393,9 +379,8 @@ function(input, output) {
             addMarkers(clusterOptions = markerClusterOptions(),
                        lng=targetplan[[i]]$LON,lat=targetplan[[i]]$LAT,
                        icon=list(iconUrl=paste('icon/',choice[index[i]],'.png',sep = ""),iconSize=c(20,20)),
-                       popup=paste("Name:",targetplan[[i]]$NAME,"<br/>",
+                       popup=paste("Name:",a(targetplan[[i]]$NAME,href = targetplan[[i]]$URL),"<br/>",
                                    "Tel:",targetplan[[i]]$TEL,"<br/>",
-                                   "Website:",a(targetplan[[i]]$URL, href = targetplan[[i]]$URL),"<br/>", # warning appears
                                    "Address:",targetplan[[i]]$ADDRESS),
                        group=choice[index[i]],layerId = i )
         }
