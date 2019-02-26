@@ -12,7 +12,7 @@ Museum<-na.omit(read.csv("../output/Museum.csv",header=T))
 Theatre<-na.omit(read.csv("../output/Theater.csv",header=T))
 all_data<-list(Gallery=Gallery,Library=Library,Museum=Museum,Restaurant=restaurant,Theatre=Theatre)
 register_google("AIzaSyA8OuCvy04PC3N-K9y6DdEc32hUpNyUrl8")
-load("../output/sub.station.RData")
+load("../output/subway_new.RData")
 load("../output/bus.stop.RData")
 source("../lib/global.R")
 # Define a server for the Shiny app
@@ -403,11 +403,11 @@ function(input, output) {
           
           if(p==TRUE){
             proxy %>% 
-              addMarkers(data=bus, ~lng, ~lat,label = ~info,icon=icons(
+              addMarkers(data=bus.stop, ~lng, ~lat,label = ~info,icon=icons(
                 iconUrl = "icon/bus.png",
-                iconWidth =10, iconHeight = 10),layerId=as.character(bus$info))
+                iconWidth =10, iconHeight = 10),layerId=as.character(bus.stop$info))
           }
-          else proxy%>%removeMarker(layerId=as.character(bus$info))
+          else proxy%>%removeMarker(layerId=as.character(bus.stop$info))
           
         })
         
