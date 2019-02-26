@@ -169,25 +169,25 @@ function(input, output) {
     output$table1 <- renderDataTable({
       
       if (input$region1 == 'Museum'){
-        print(Museum[,1:4])
+        print(Museum[,c(1,2,4)])
         
       }
       else if(input$region1 == 'Theatre'){
-        print(Theatre[,1:4])
+        print(Theatre[,c(1,2,4)])
         
       }
       else if(input$region1 == 'Gallery'){
-        print(Gallery[,1:4])
+        print(Gallery[,c(1,2,4)])
       }
       else if(input$region1 == 'Library'){
-        print(Library[,c(1,3,6)])
+        print(Library[,c(1,6)])
       }
       else if(input$region1 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,3,4,7,8,11,14,15)])
+          print(restaurant[,c(2,3,4,7,8,14,15)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,11,14,15)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,14,15)])
         }
         
       }
@@ -198,25 +198,25 @@ function(input, output) {
     output$table2 <- renderDataTable({
       
       if (input$region2 == 'Museum'){
-        print(Museum[,1:4])
+        print(Museum[,c(1,2,4)])
         
       }
       else if(input$region2 == 'Theatre'){
-        print(Theatre[,1:4])
+        print(Theatre[,c(1,2,4)])
         
       }
       else if(input$region2 == 'Gallery'){
-        print(Gallery[,1:4])
+        print(Gallery[,c(1,2,4)])
       }
       else if(input$region2 == 'Library'){
-        print(Library[,c(1,3,6)])
+        print(Library[,c(1,6)])
       }
       else if(input$region2 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,3,4,7,8,11,14,15)])
+          print(restaurant[,c(2,3,4,7,8,14,15)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,11,14,15)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,14,15)])
         }    
       }
     },
@@ -226,25 +226,25 @@ function(input, output) {
     output$table3 <- renderDataTable({
       
       if (input$region3 == 'Museum'){
-        print(Museum[,1:4])
+        print(Museum[,c(1,2,4)])
         
       }
       else if(input$region3 == 'Theatre'){
-        print(Theatre[,1:4])
+        print(Theatre[,c(1,2,4)])
         
       }
       else if(input$region3 == 'Gallery'){
-        print(Gallery[,1:4])
+        print(Gallery[,c(1,2,4)])
       }
       else if(input$region3 == 'Library'){
-        print(Library[,c(1,3,6)])
+        print(Library[,c(1,6)])
       }
       else if(input$region3 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,3,4,7,8,11,14,15)])
+          print(restaurant[,c(2,3,4,7,8,14,15)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,11,14,15)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,14,15)])
         }
       }
     },options = list(
