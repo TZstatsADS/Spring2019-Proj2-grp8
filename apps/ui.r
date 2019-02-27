@@ -68,13 +68,16 @@ ui <- dashboardPage(
                                 br(),
                                 br(),
                                 br(),
-                                br(),
                                 h1("Your Travel Suggestions in Manhattan",style="color:white;font-family: Times New Roman;font-size: 300%;font-weight: bold;"),
                                 br(),
                                 br(),
-                                br(),
                                 h3("Gourp 8 - Spring 2019",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;"),
-                                br()
+                                br(),
+                                h5("Caihui Xiao",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;"),
+                                h5("Charlie Chen",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;"),
+                                h5("Weixuan Wu",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;"),
+                                h5("Xiaoxi Zhao",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;"),
+                                h5("Yuqiao Li",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;")
                                 
                                 
                                 
@@ -125,7 +128,7 @@ ui <- dashboardPage(
                                            )
                                     ),
                                     
-                                    column(width = 4,
+                                    column(width = 5,
                                            style = "width:300px;display:inline-block;margin-right:0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
                                            leafletOutput("map1", width = "250%", height = 550)
                                           
@@ -142,8 +145,9 @@ ui <- dashboardPage(
                                 ),
                                 
                                 div(id="pg3_header",
-                                    titlePanel("No idea at all?"),
-                                    h4("Just tell us where you are and how far you want to travel. We'll make a perfect plan for your day!")
+                                    #titlePanel("No idea at all?"),
+                                    h3(HTML('&nbsp;'),HTML('&nbsp;'),HTML('&nbsp;'),"No idea at all?"),
+                                    h4(HTML('&nbsp;'),HTML('&nbsp;'),HTML('&nbsp;'),"Just tell us where you are and how far you want to travel. We'll make a perfect plan for your day!")
                                 ),
                               
                                 
@@ -166,14 +170,14 @@ ui <- dashboardPage(
                                          br(),p(),br(),p(),
                                          
                                          div(id = "random_choice", 
-                                             textOutput("msg1"),br(),
-                                             textOutput("msg2"),br(),
-                                             textOutput("msg3")
+                                             h4(textOutput("msg1")),br(),
+                                             h4(textOutput("msg2")),br(),
+                                             h4(textOutput("msg3"))
                                              )
                                          
                                          ),
                                   column(6,
-                                         leafletOutput("map",width = "200%", height = 600),
+                                         leafletOutput("map",width = "200%", height = 550),
                                          conditionalPanel('input.submit4 >0 && input.submit > 0',
                                                           absolutePanel(id="legend",
                                                                         class = "panel panel-default",

@@ -2,6 +2,7 @@ library(geosphere)
 library(ggmap)
 library(maptools)
 library(leaflet)
+library(leaflet.extras)
 library(readr)
 library(shinyalert)
 restaurant<-data.frame(na.omit(read_csv("../output/restaurant_final.csv")))
@@ -39,8 +40,8 @@ function(input, output) {
   
   output$map1 <- renderLeaflet({
     
-    map <- leaflet() %>%addProviderTiles('Esri.WorldTopoMap') %>%
-      setView(-73.983,40.7639,zoom = 13)
+    map <- leaflet() %>% setView(-73.983,40.7639,zoom = 13)  %>% addProviderTiles(providers$Esri.WorldTopoMap)
+      
     
     for (i in 1:5){
       leafletProxy('map1',data=all_data[[namedata[i]]]) %>%
@@ -211,6 +212,22 @@ function(input, output) {
       Museum = museum_subset
     }
     
+    if (nrow(theatre_subset) != 0){
+      Theatre = theatre_subset
+    }
+    
+    if (nrow(restaurant_subset) != 0){
+      restaurant = restaurant_subset
+    }
+    
+    if (nrow(library_subset) != 0){
+      Library = library_subset
+    }
+    
+    if (nrow(gallery_subset) != 0){
+      Gallery = gallery_subset
+    }
+    
     output$table1 <- renderDataTable({
       
       if (input$region1 == 'Museum'){
@@ -229,17 +246,18 @@ function(input, output) {
       }
       else if(input$region1 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,3,4,7,8,14,15)])
+          print(restaurant[,c(2,7,8,14)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,14,15)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,7,8,14)])
         }
         
       }
     },
-      options = list(
-        scrollX=T,
-        pageLength = 3)) 
+    options = list(
+      scrollX=T,
+      pageLength = 3,
+      lengthMenu = c(3, 5, 10))) 
     output$table2 <- renderDataTable({
       
       if (input$region2 == 'Museum'){
@@ -258,16 +276,16 @@ function(input, output) {
       }
       else if(input$region2 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,3,4,7,8,14,15)])
+          print(restaurant[,c(2,7,8,14)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,14,15)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,7,8,14)])
         }    
       }
     },
       options = list(
         scrollX=T,
-        pageLength = 3))
+        pageLength = c(3,5,10)))
     output$table3 <- renderDataTable({
       
       if (input$region3 == 'Museum'){
@@ -286,15 +304,17 @@ function(input, output) {
       }
       else if(input$region3 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,3,4,7,8,14,15)])
+          print(restaurant[,c(2,7,8,14)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,14,15)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,7,8,14)])
         }
       }
     },options = list(
-        scrollX=T,
-        pageLength = 3))
+      scrollX=T,
+      pageLength = 3,
+      lengthMenu = c(3, 5, 10))
+    )
     }
       )
  
@@ -304,8 +324,9 @@ function(input, output) {
         coord<-getlatlng()
         lat<-coord[1]
         long<-coord[2]
-        output$map<-renderLeaflet(
-          {    map <- leaflet() %>% addTiles()
+        output$map<-renderLeaflet({
+          
+          map <- leaflet()%>%setView()%>% addProviderTiles(providers$Esri.WorldTopoMap)
           
           map <- addControlGPS(map, options = gpsOptions(position = "topleft", activate = TRUE, 
                                                          autoCenter = TRUE, maxZoom = 10, 
@@ -325,7 +346,7 @@ function(input, output) {
           shinyalert("Please enter a valid Address!",type="error")
         }else{
           output$map<-renderLeaflet(
-            {    map<-leaflet() %>%  addTiles()%>%
+            {    map<-leaflet() %>% addProviderTiles(providers$Esri.WorldTopoMap)%>%
               addMarkers(lng=long,lat=lat)
             
             
@@ -367,7 +388,7 @@ function(input, output) {
         
         output$msg3 = renderText({
           paste("Click the icons on the map for more information. Not satisfied? Click
-                Feeling Lucky again!", sep="")
+                'Feeling Lucky' again for another recommendation!", sep="")
         })
         
         
