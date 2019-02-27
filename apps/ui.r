@@ -68,13 +68,16 @@ ui <- dashboardPage(
                                 br(),
                                 br(),
                                 br(),
-                                br(),
                                 h1("Your Travel Suggestions in Manhattan",style="color:white;font-family: Times New Roman;font-size: 300%;font-weight: bold;"),
                                 br(),
                                 br(),
-                                br(),
                                 h3("Gourp 8 - Spring 2019",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;"),
-                                br()
+                                br(),
+                                h5("Caihui Xiao",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;"),
+                                h5("Charlie Chen",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;"),
+                                h5("Weixuan Wu",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;"),
+                                h5("Xiaoxi Zhao",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;"),
+                                h5("Yuqiao Li",style="color:white;font-family: Times New Roman;font-size: 200%;font-weight: bold;")
                                 
                                 
                                 
