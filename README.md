@@ -28,7 +28,7 @@ Term: Spring 2019
 
 + **Contribution statement**: (See [Note on contributions](doc/a_note_on_contributions.md) for more details ) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
 	+ Data Acquisition
-		updated museum dataset: cx2225
+		+ updated museum dataset: cx2225
 		+ online scraped
 		+ something else
 	+ Data Cleaning
@@ -38,22 +38,22 @@ Term: Spring 2019
 		+ things did 1: uni1, uni2, uni3
 		+ things did 2: uni1, uni2, uni3
 	+ UI Design
-		Created the three-page frame: cx2225
+		+ Created the three-page frame: cx2225
 		+ things did 1: uni1, uni2, uni3
 		+ things did 2: uni1, uni2, uni3
 	+ Server - Welcome Page
 		+ things did 1: uni1, uni2, uni3
 		+ things did 2: uni1, uni2, uni3
 	+ Server - Search Page
-		Input selection : cx2225
-		Datatable ouput : cx2225
-		Reset map button: cx2225
-		Create Map : cx2225
-		Map with markers : cx2225
+		+ Input selection : cx2225
+		+ Datatable ouput : cx2225
+		+ Reset map button: cx2225
+		+ Create Map : cx2225
+		+ Map with markers : cx2225
 		
 		+ things did 2: uni1, uni2, uni3
 	+ Server - Feeling Lucky Page
-		Initial map show New York: cx2225
+		+ Initial map show at New York: cx2225
 		+ things did 1: uni1, uni2, uni3
 		+ things did 2: uni1, uni2, uni3
 		
