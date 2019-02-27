@@ -20,47 +20,48 @@ Term: Spring 2019
 	+ Xiaoxi Zhao: xz2740@columbia.edu
 
 + **Project summary**: In this second project of GR5243 Applied Data Science, we built a demo app to assit users in choosing places they would like to visit in New York City. Based on shiny app projects conducted by group 6 (Fall 2017) and group 14 (Spring 2017), we have integrated datasets of businesses, such as restaurants, museums and theatres, and organized to display various business information in a data table and to visualize the places in maps to further enhance users' experience.
-	+ Search Page: Users can select their own choice of places (up to three choices) and can specify restaurant type in the top left panel. Key business information of the selected businesses will be displayed in the left table. The right panel shows the heatmap of the businesses in New York City. Users can zoom in and out using the "+" and "-" button on the top left of the map. Businesses displayed on the data table will automatically change as the users interacting with the city map. Key information of the businesses, such as Name, Tel, and Address are available on the map if clicked.
+	+ Search Page: Users can select their own choice of places (up to three choices) and can specify restaurant type in the top right panel. Key business information of the selected businesses will be displayed in the left table. The right panel shows the heatmap of the businesses in New York City. Users can zoom in and out by scrolling, or using the "+" and "-" button on the top left of the map. Businesses displayed on the data table will automatically sync as the users interacting with the city map. Key information of the businesses, such as Name, Tel, and Address are available on the map if clicked.
 	
-	+ Feeling Lucky Page: On this page, we will provide travel suggestions for users who do not specify their travel preferences. Users can enter their current location on input box. The App will track users' address and show users' current location on a pop-up map after users clicking "confirm" next to the input box. Click "Feeling lucky", and the App will provide travel suggestions for three random places within users' specified distance, including one restaurant and two businesses from another two random categories. Click "Feeling lucky" again to get a different travel suggestion.
+	+ Feeling Lucky Page: On this page, we will provide random travel suggestions for users who do not specify their travel preferences. Users can enter their current location in the input box. The App will track users' address and show users' current location on a pop-up map after users clicking "confirm" next to the input box. Click "Feeling Lucky", and the App will provide travel suggestions for three random places within users' specified distance, including one restaurant and two businesses from another two random categories. Click "Feeling Lucky" again to get a different travel suggestion.
 
 + **Data Source**: We primarily used data from NYC Open Data. In addition, we utilized Google API during data processing. For data sources detail, please check [data source description](doc/project2_desc.md).
 
 + **Contribution statement**: (See [Note on contributions](doc/a_note_on_contributions.md) for more details ) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
 	+ Data Acquisition
-		+ updated museum dataset: cx2225
-		+ updated theatre,library,gallery dataset: xz2740
-		+ something else
+		+ Used Yelp API to fetch information of 20,000+ restaurants: ww2493, yl3965
+		+ Scraped and parsed 17,000+ yelp restaurant web pages to collect top customer reviews: ww2493, yl3965
+		+ Updated museum dataset: cx2225
+		+ Updated theatre, library, and gallery datasets: xz2740
 	+ Data Cleaning
-		+ clean and formalize theatre,library,gallery,museum,restaurant dataset : xz2740
-		+ things did 2: uni1, uni2, uni3
+		+ Cleaned and formalized theatre, library, gallery, museum, and restaurant datasets: xz2740
+		+ Joined the original dataset with the new data acquired from Yelp API: yl3965
+		+ Consolidated 85 restaurant categories to more user-friendly groupings: ww2493
 	+ Data Processing
-		+ things did 1: uni1, uni2, uni3
-		+ things did 2: uni1, uni2, uni3
+		+ Extracted most frequent words in customer reviews for each restaurant: yl3965
 	+ UI Design
 		+ Created the three-page frame: cx2225
-		+ things did 1: uni1, uni2, uni3
-		+ things did 2: uni1, uni2, uni3
+		+ Welcome page UI: zc2422, ww2493
+		+ Navigation bar and sidebar CSS design: ww2493
+		+ Feeling Lucky page CSS design: ww2493
+		+ Modified Feeling Lucky page layout: zc2422
 	+ Server - Welcome Page
-		+ things did 1: uni1, uni2, uni3
-		+ things did 2: uni1, uni2, uni3
 	+ Server - Search Page
-		+ Input selection : cx2225,xz2740
+		+ Input selection : cx2225, xz2740
 		+ Datatable ouput : cx2225
 		+ Reset map button: cx2225
 		+ Create Map : cx2225
-		+ Map with markers : cx2225,xz2740
+		+ Map with markers : cx2225, xz2740
 		+ Pop up window of each marker: xz2740
-		+ things did 2: uni1, uni2, uni3
 	+ Server - Feeling Lucky Page
 		+ Initial map show at New York: cx2225
 		+ Create Map: xz2740
 		+ Map with markers : xz2740
 		+ Pop up window of each marker (with photos and URL): xz2740
-		+ Locate the user and get back the Lat and Lon: xz2740
+		+ Locate the user and return the Lat and Lon: xz2740
 		+ Select random place to go: xz2740
 		+ Input selection and button design: xz2740
 		+ ErrorPage when an invalid location is entered: xz2740
+		+ Text output on random choice: ww2493
 		
 	+ Publish: yl3965
 		
