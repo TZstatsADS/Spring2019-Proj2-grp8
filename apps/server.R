@@ -287,7 +287,8 @@ function(input, output) {
     },
       options = list(
         scrollX=T,
-        pageLength = c(3,5,8)))
+        pageLength = 3,
+        lengthMenu = c(3, 5, 8)))
     output$table3 <- renderDataTable({
       
       if (input$region3 == 'Museum'){
