@@ -3,6 +3,7 @@
 ### [Project Description](doc/project2_desc.md)
 
 ![screenshot](doc/welcome.png)
+![screenshot](doc/Search.png)
 ![screenshot](doc/FeelingLucky.png)
 
 In this second project of GR5243 Applied Data Science, we develop a version 2.0 of an *Exploratory Data Analysis and Visualization* shiny app: *Day Planner* on travel advising using [NYC Open Data](https://opendata.cityofnewyork.us/) and data scrwalled using Google API. See [Project 2 Description](doc/project2_desc.md) for more details.  
