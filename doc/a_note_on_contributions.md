@@ -10,6 +10,7 @@ Below is an example. If no contribution statement is provided, we will insert a 
 
 ---
 All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
+
 	+ Data Acquisition
 		+ Used Yelp API to fetch information of 20,000+ restaurants: ww2493, yl3965
 		+ Scraped and parsed 17,000+ yelp restaurant web pages to collect top customer reviews: ww2493, yl3965
