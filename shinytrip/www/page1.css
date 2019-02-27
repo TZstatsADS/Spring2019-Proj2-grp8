@@ -1,0 +1,95 @@
+div.Page_1 {
+  background-image: url("NY.jpg");
+  background-size:     cover;                      
+  background-repeat:   no-repeat;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 41px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+
+div.map {
+  position: fixed;
+  top: 41px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  padding: 10px;
+}
+
+
+
+div.botton {
+  display: inline-block;
+  vertical-align: text-top;
+  padding: 7px;
+  border: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  border-color: #CCC;
+}
+
+/* Customize fonts */
+body, label, input, button, select { 
+  font-family: 'Helvetica Neue', Helvetica;
+  font-weight: 200;
+}
+
+
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50; /* Green */
+}
+
+
+.navbar {
+    margin-bottom: 0;
+}
+
+
+
+
+.div.outer {
+  position: fixed;
+  top: 41px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+
+
+#legend {
+    width: 220px;
+    height: 150px;
+    margin:inherit;
+    background-color:rgba(255,255,255, 0.6);
+ 
+}
+
+#random_choice {
+    font-family: 'Helvetica Neue', Helvetica;
+    font-size: 18px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
