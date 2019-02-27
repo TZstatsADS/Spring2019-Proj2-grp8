@@ -16,7 +16,17 @@ all_data<-list(Gallery=Gallery,Library=Library,Museum=Museum,Restaurant=restaura
 register_google("AIzaSyA8OuCvy04PC3N-K9y6DdEc32hUpNyUrl8")
 load("../output/subway_new.RData")
 load("../output/bus.stop.RData")
-source("../lib/global.R")
+get_candidate<-function(data,Lon0,Lat0,r){
+  coords<-cbind(data$LON,data$LAT)
+  dis<-distm(coords,c(Lon0,Lat0), fun = distHaversine)
+  Ind<-dis<r
+  return(data[Ind,])
+}
+randomchoice<-function(data){
+  n<-nrow(data)
+  index<-sample(1:n,1)
+  return(data[index,])
+}
 # Define a server for the Shiny app
 #all_data1 = list(museum = museum,theatre = theatre, restaurant = restaurant)
 #namedata1 = c('museum','theatre','restaurant')
