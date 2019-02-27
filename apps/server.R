@@ -2,6 +2,7 @@ library(geosphere)
 library(ggmap)
 library(maptools)
 library(leaflet)
+library(leaflet.extras)
 library(readr)
 library(shinyalert)
 restaurant<-data.frame(na.omit(read_csv("../output/restaurant_final.csv")))
@@ -39,8 +40,8 @@ function(input, output) {
   
   output$map1 <- renderLeaflet({
     
-    map <- leaflet() %>%addProviderTiles('Esri.WorldTopoMap') %>%
-      setView(-73.983,40.7639,zoom = 13)
+    map <- leaflet() %>% setView(-73.983,40.7639,zoom = 13)  %>% addProviderTiles(providers$Esri.WorldTopoMap)
+      
     
     for (i in 1:5){
       leafletProxy('map1',data=all_data[[namedata[i]]]) %>%
@@ -320,8 +321,9 @@ function(input, output) {
         coord<-getlatlng()
         lat<-coord[1]
         long<-coord[2]
-        output$map<-renderLeaflet(
-          {    map <- leaflet() %>% addTiles()
+        output$map<-renderLeaflet({
+          
+          map <- leaflet()%>%setView()%>% addProviderTiles(providers$Esri.WorldTopoMap)
           
           map <- addControlGPS(map, options = gpsOptions(position = "topleft", activate = TRUE, 
                                                          autoCenter = TRUE, maxZoom = 10, 
@@ -341,7 +343,7 @@ function(input, output) {
           shinyalert("Please enter a valid Address!",type="error")
         }else{
           output$map<-renderLeaflet(
-            {    map<-leaflet() %>%  addTiles()%>%
+            {    map<-leaflet() %>% addProviderTiles(providers$Esri.WorldTopoMap)%>%
               addMarkers(lng=long,lat=lat)
             
             
