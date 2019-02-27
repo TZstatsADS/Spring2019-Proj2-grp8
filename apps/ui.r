@@ -13,6 +13,7 @@ library(leaflet.extras)
 library(rebird)
 library(geosphere)
 library(ggmap)
+library(shinyalert)
 # Use a fluid Bootstrap layout
 
 restaurant<- read.csv('../output/restaurant_final.csv')
