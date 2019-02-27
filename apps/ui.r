@@ -128,7 +128,7 @@ ui <- dashboardPage(
                                            )
                                     ),
                                     
-                                    column(width = 4,
+                                    column(width = 5,
                                            style = "width:300px;display:inline-block;margin-right:0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
                                            leafletOutput("map1", width = "250%", height = 550)
                                           

@@ -254,9 +254,10 @@ function(input, output) {
         
       }
     },
-      options = list(
-        scrollX=T,
-        pageLength = 3)) 
+    options = list(
+      scrollX=T,
+      pageLength = 3,
+      lengthMenu = c(3, 5, 8))) 
     output$table2 <- renderDataTable({
       
       if (input$region2 == 'Museum'){
@@ -284,7 +285,7 @@ function(input, output) {
     },
       options = list(
         scrollX=T,
-        pageLength = 3))
+        pageLength = c(3,5,8)))
     output$table3 <- renderDataTable({
       
       if (input$region3 == 'Museum'){
@@ -310,8 +311,10 @@ function(input, output) {
         }
       }
     },options = list(
-        scrollX=T,
-        pageLength = 3))
+      scrollX=T,
+      pageLength = 3,
+      lengthMenu = c(3, 5, 8))
+    )
     }
       )
  
