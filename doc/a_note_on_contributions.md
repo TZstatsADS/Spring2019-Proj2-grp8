@@ -9,12 +9,45 @@ Post your title, team members, project abstract and a contribution statement in 
 Below is an example. If no contribution statement is provided, we will insert a default statement that goes "**All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement**. "
 
 ---
-Sample project README statement.
-
-Project xxx
-
-Team members: Avi Bond, Comma Deed, En Funn, Gem Hon
-
-Summary: In this project, we developed a new method and improved the classification accuracy for images of cats and dogs to 99.9%
-
-[Contribution Statement] AB, CD, EF and GH designed the study. AB and CD developed baseline classification model for evaluation. EF and GH explored feature engineering for improving the baseline model. AB, EF and GH discussed and designed the model evaluation protocol. CD carried out the computation for model evaluation. All team members contributed to the GitHub repository and prepared the presentation. All team members approve our work presented in our GitHub repository including this contribution statement.
+All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
+	+ Data Acquisition
+		+ Used Yelp API to fetch information of 20,000+ restaurants: ww2493, yl3965
+		+ Scraped and parsed 17,000+ yelp restaurant web pages to collect top customer reviews: ww2493, yl3965
+		+ Updated museum dataset: cx2225
+		+ Updated theatre, library, and gallery datasets: xz2740
+	+ Data Cleaning
+		+ Cleaned and formalized theatre, library, gallery, museum, and restaurant datasets: xz2740
+		+ Joined the original dataset with the new data acquired from Yelp API: yl3965
+		+ Consolidated 85 restaurant categories to more user-friendly groupings: ww2493
+	+ Data Processing
+		+ Extracted most frequent words in customer reviews for each restaurant: yl3965
+	+ UI Design
+		+ Created the three-page frame: cx2225
+		+ Welcome page UI: zc2422, ww2493
+		+ Navigation bar and sidebar CSS design: ww2493
+		+ Search page choice input, dataTable and map layout: zc2422
+		+ Feeling Lucky page CSS design: ww2493
+		+ Modified Feeling Lucky page layout: zc2422
+	+ Server - Welcome Page
+		+ Modified Background add formatted word description zc2422
+	+ Server - Search Page
+		+ Input selection : cx2225, xz2740
+		+ DataTable ouput : cx2225
+		+ Reset map button: cx2225
+		+ Create Map : cx2225
+		+ Map sync with datatable output: zc2422
+		+ Map with markers : cx2225, xz2740
+		+ Pop up window of each marker: xz2740
+	+ Server - Feeling Lucky Page
+		+ Initial map show at New York: cx2225
+		+ Create Map: xz2740
+		+ Map with markers : xz2740
+		+ Pop up window of each marker (with photos and URL): xz2740
+		+ Locate the user and return the Lat and Lon: xz2740
+		+ Select random place to go: xz2740
+		+ Input selection and button design: xz2740
+		+ ErrorPage when an invalid location is entered: xz2740
+		+ Text output on random choice: ww2493
+		
+	 + Publish: yl3965
+	 + Debug : zc2422, yl3965, ww2493, cx2225, xz2740
