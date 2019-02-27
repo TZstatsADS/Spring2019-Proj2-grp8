@@ -17,11 +17,34 @@ Term: Spring 2019
 	+ Caihui Xiao: cx2225@columbia.edu
 	+ Xiaoxi Zhao: xz2740@columbia.edu
 
-+ **Project summary**: In this second project of GR5243 Applied Data Science, we built a demo app to assit users in choosing places they would like to visit in New York City. Based on shiny app projects by group 6 (Fall 2017) and group 14 (Spring 2017), we have integrated datasets of businesses, such as restaurants, museums and theatres, and organized to display various business information in a data table and to visualize the places in maps to further enhance users' experience.
++ **Project summary**: In this second project of GR5243 Applied Data Science, we built a demo app to assit users in choosing places they would like to visit in New York City. Based on shiny app projects conducted by group 6 (Fall 2017) and group 14 (Spring 2017), we have integrated datasets of businesses, such as restaurants, museums and theatres, and organized to display various business information in a data table and to visualize the places in maps to further enhance users' experience.
 
 + **Data Source**: We primarily used data from NYC Open Data. In addition, we utilized Google API during data processing. For data sources detail, please check [data source description](doc/project2_desc.md).
 
 + **Contribution statement**: (See [Note on contributions](doc/a_note_on_contributions.md) for more details ) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
+	+ Data Acquisition
+		+ online scraped
+		+ something else
+	+ Data Cleaning
+		+ things did 1: uni1, uni2, uni3
+		+ things did 2: uni1, uni2, uni3
+	+ Data Processing
+		+ things did 1: uni1, uni2, uni3
+		+ things did 2: uni1, uni2, uni3
+	+ UI Design
+		+ things did 1: uni1, uni2, uni3
+		+ things did 2: uni1, uni2, uni3
+	+ Server - Welcome Page
+		+ things did 1: uni1, uni2, uni3
+		+ things did 2: uni1, uni2, uni3
+	+ Server - Search Page
+		+ things did 1: uni1, uni2, uni3
+		+ things did 2: uni1, uni2, uni3
+	+ Server - Feeling Lucky Page
+		+ things did 1: uni1, uni2, uni3
+		+ things did 2: uni1, uni2, uni3
+
++ **Reference**: We used part of the codes from [group 6 (Fall 2017)](https://github.com/TZstatsADS/Fall2017-project2-grp6) as reference for data visualization. The feeling lucky page of our APP was inferred from the random choice page of [group 14 (Spring 2017)](https://github.com/TZstatsADS/Spr2017-proj2-grp14). Please cite the repository with citations.
 
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
