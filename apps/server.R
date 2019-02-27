@@ -5,7 +5,6 @@ library(leaflet)
 library(leaflet.extras)
 library(readr)
 library(shinyalert)
-library(rjson)
 restaurant<-data.frame(na.omit(read_csv("../output/restaurant_final.csv")))
 type <- unique(as.character(restaurant$CUISINE))
 namedata<-c("Restaurant","Museum","Theatre","Gallery","Library")
@@ -45,9 +44,9 @@ function(input, output) {
       
     
     for (i in 1:5){
+      n<-nrow(all_data[[namedata[i]]])
       leafletProxy('map1',data=all_data[[namedata[i]]]) %>%
         addMarkers(
-          
           clusterOptions = markerClusterOptions(),
           lng=all_data[[namedata[i]]]$LON,
           lat=all_data[[namedata[i]]]$LAT,
@@ -57,7 +56,6 @@ function(input, output) {
                       "Zipcode:",all_data[[namedata[i]]]$ZIP,"<br/>",
                       "Address:",all_data[[namedata[i]]]$ADDRESS),
           group=namedata[i])
-
     }
     map%>%hideGroup(c("Restaurant","Museum","Theatre","Gallery","Library")) 
     
@@ -396,7 +394,7 @@ function(input, output) {
         leafletProxy("map")%>%
           clearMarkerClusters()
         
-        for (i in 1:3){
+        for (i in 1:2){
           leafletProxy("map",data=targetplan[[i]]) %>%
             addMarkers(clusterOptions = markerClusterOptions(),
                        lng=targetplan[[i]]$LON,lat=targetplan[[i]]$LAT,
@@ -406,7 +404,21 @@ function(input, output) {
                                    "Address:",targetplan[[i]]$ADDRESS),
                        group=choice[index[i]],layerId = i )
         }
-        
+        i<-3
+        leafletProxy("map",data=targetplan[[i]]) %>%
+          addMarkers(clusterOptions = markerClusterOptions(),
+                     lng=targetplan[[i]]$LON,lat=targetplan[[i]]$LAT,
+                     icon=list(iconUrl=paste('icon/',choice[index[i]],'.png',sep = ""),iconSize=c(20,20)),
+                     popup=paste(img(src=targetplan[[i]]$IMAGE_URL,width=80,height=80),"<br/>",
+                       "Name:",a(targetplan[[i]]$NAME,href = targetplan[[i]]$URL),"<br/>",
+                                 "Tel:",restaurant$TEL,"<br/>",
+                                 "Rating:",restaurant$RATING,"<br/>",
+                                 "Price:",restaurant$PRICE,"<br/>",
+                                 "Cuisine:",restaurant$CUISINE,"<br/>",
+                                 "Tag:",restaurant$TAG,"<br/>",
+                                 "Address:",restaurant$ADDRESS,"<br/>",
+                                 "Grade:",restaurant$GRADE,"<br/>"),
+                     group=choice[index[i]],layerId = i )
         observeEvent(input$Subway,{
           p<-input$Subway
           proxy<-leafletProxy("map")
