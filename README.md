@@ -29,10 +29,10 @@ Term: Spring 2019
 + **Contribution statement**: (See [Note on contributions](doc/a_note_on_contributions.md) for more details ) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
 	+ Data Acquisition
 		+ updated museum dataset: cx2225
-		+ online scraped
+		+ updated theatre,library,gallery dataset: xz2740
 		+ something else
 	+ Data Cleaning
-		+ things did 1: uni1, uni2, uni3
+		+ clean and formalize theatre,library,gallery,museum,restaurant dataset : xz2740
 		+ things did 2: uni1, uni2, uni3
 	+ Data Processing
 		+ things did 1: uni1, uni2, uni3
@@ -45,17 +45,22 @@ Term: Spring 2019
 		+ things did 1: uni1, uni2, uni3
 		+ things did 2: uni1, uni2, uni3
 	+ Server - Search Page
-		+ Input selection : cx2225
+		+ Input selection : cx2225,xz2740
 		+ Datatable ouput : cx2225
 		+ Reset map button: cx2225
 		+ Create Map : cx2225
-		+ Map with markers : cx2225
-		
+		+ Map with markers : cx2225,xz2740
+		+ Pop up window of each marker: xz2740
 		+ things did 2: uni1, uni2, uni3
 	+ Server - Feeling Lucky Page
 		+ Initial map show at New York: cx2225
-		+ things did 1: uni1, uni2, uni3
-		+ things did 2: uni1, uni2, uni3
+		+ Create Map: xz2740
+		+ Map with markers : xz2740
+		+ Pop up window of each marker (with photos and URL): xz2740
+		+ Locate the user and get back the Lat and Lon: xz2740
+		+ Select random place to go: xz2740
+		+ Input selection and button design: xz2740
+		+ ErrorPage when an invalid location is entered: xz2740
 		
 	+ Publish: yl3965
 		
