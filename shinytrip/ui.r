@@ -113,7 +113,7 @@ ui <- dashboardPage(
                                 
                                 ################ Second Row ###################
                                 mainPanel(
-                                  fluidRow(
+                                 # fluidRow(
                                     column(7,
                                            #style = "width:500px;display:inline-block;margin-right:0px;margin-bottom:0px;margin-top:0px;padding-right:0px",
                                            tabsetPanel(type = "tabs",
@@ -129,7 +129,7 @@ ui <- dashboardPage(
                                           
                                            
                                     )
-                                  )
+                                  #)
                                 )
                         ),
                         

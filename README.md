@@ -11,8 +11,8 @@ In this second project of GR5243 Applied Data Science, we develop a version 2.0 
 ## Day Planner: a shiny app for travel advising
 Term: Spring 2019
 
-+ Team #8
-+ **Team members**: 
++ [Link to shiny app](https://spring19grp8proj2.shinyapps.io/dayplanner/)
++ **Team #8 members**: 
 	+ Charlie Chen: zc2422@gsb.columbia.edu
 	+ Yuqiao Li: yl3965@columbia.edu
 	+ Weixuan Wu: ww2493@columbia.edu
