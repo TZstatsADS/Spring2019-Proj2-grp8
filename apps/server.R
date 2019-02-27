@@ -246,10 +246,10 @@ function(input, output) {
       }
       else if(input$region1 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,3,4,7,8,14,15)])
+          print(restaurant[,c(2,7,8,14)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,14,15)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,7,8,14)])
         }
         
       }
@@ -276,10 +276,10 @@ function(input, output) {
       }
       else if(input$region2 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,3,4,7,8,14,15)])
+          print(restaurant[,c(2,7,8,14)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,14,15)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,7,8,14)])
         }    
       }
     },
@@ -304,10 +304,10 @@ function(input, output) {
       }
       else if(input$region3 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,3,4,7,8,14,15)])
+          print(restaurant[,c(2,7,8,14)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,3,4,7,8,14,15)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,7,8,14)])
         }
       }
     },options = list(
