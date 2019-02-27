@@ -327,10 +327,8 @@ function(input, output) {
         coord<-getlatlng()
         lat<-coord[1]
         long<-coord[2]
-        output$map<-renderLeaflet({
-          
-          map <- leaflet()%>%setView()%>% addProviderTiles(providers$Esri.WorldTopoMap)
-          
+        output$map<-renderLeaflet(
+          {    map <- leaflet() %>% addTiles()
           map <- addControlGPS(map, options = gpsOptions(position = "topleft", activate = TRUE, 
                                                          autoCenter = TRUE, maxZoom = 10, 
                                                          setView = TRUE))
@@ -349,7 +347,7 @@ function(input, output) {
           shinyalert("Please enter a valid Address!",type="error")
         }else{
           output$map<-renderLeaflet(
-            {    map<-leaflet() %>% addProviderTiles(providers$Esri.WorldTopoMap)%>%
+            {    map<-leaflet() %>% addTiles%>%
               addMarkers(lng=long,lat=lat)
             
             
