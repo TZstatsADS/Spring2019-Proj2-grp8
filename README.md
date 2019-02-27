@@ -40,7 +40,7 @@ Term: Spring 2019
 		+ Extracted most frequent words in customer reviews for each restaurant: yl3965
 	+ UI Design
 		+ Created the three-page frame: cx2225
-		+ Welcome page UI: zc2422, ww2493
+		+ Welcome page UI: zc2422, ww2493，yl3965
 		+ Navigation bar and sidebar CSS design: ww2493
 		+ Search page choice input, dataTable and map layout: zc2422
 		+ Feeling Lucky page CSS design: ww2493
@@ -49,7 +49,7 @@ Term: Spring 2019
 		+ Modified Background add formatted word description zc2422
 	+ Server - Search Page
 		+ Input selection : cx2225, xz2740
-		+ DataTable ouput : cx2225
+		+ DataTable ouput : cx2225, yl3965
 		+ Reset map button: cx2225
 		+ Create Map : cx2225
 		+ Map sync with datatable output: zc2422
