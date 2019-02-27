@@ -16,7 +16,7 @@ library(ggmap)
 library(shinyalert)
 # Use a fluid Bootstrap layout
 
-restaurant<- read.csv('../output/restaurant_final.csv')
+restaurant<- read.csv("../output/restaurant_final.csv")
 type <- unique(as.character(restaurant$CUISINE))
 
 ui <- dashboardPage(
