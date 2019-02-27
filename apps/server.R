@@ -211,6 +211,22 @@ function(input, output) {
       Museum = museum_subset
     }
     
+    if (nrow(theatre_subset) != 0){
+      Theatre = theatre_subset
+    }
+    
+    if (nrow(restaurant_subset) != 0){
+      restaurant = restaurant_subset
+    }
+    
+    if (nrow(library_subset) != 0){
+      Library = library_subset
+    }
+    
+    if (nrow(gallery_subset) != 0){
+      Gallery = gallery_subset
+    }
+    
     output$table1 <- renderDataTable({
       
       if (input$region1 == 'Museum'){
@@ -367,7 +383,7 @@ function(input, output) {
         
         output$msg3 = renderText({
           paste("Click the icons on the map for more information. Not satisfied? Click
-                Feeling Lucky again!", sep="")
+                'Feeling Lucky' again for another recommendation!", sep="")
         })
         
         

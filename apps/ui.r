@@ -142,8 +142,9 @@ ui <- dashboardPage(
                                 ),
                                 
                                 div(id="pg3_header",
-                                    titlePanel("No idea at all?"),
-                                    h4("Just tell us where you are and how far you want to travel. We'll make a perfect plan for your day!")
+                                    #titlePanel("No idea at all?"),
+                                    h3(HTML('&nbsp;'),HTML('&nbsp;'),HTML('&nbsp;'),"No idea at all?"),
+                                    h4(HTML('&nbsp;'),HTML('&nbsp;'),HTML('&nbsp;'),"Just tell us where you are and how far you want to travel. We'll make a perfect plan for your day!")
                                 ),
                               
                                 
@@ -166,14 +167,14 @@ ui <- dashboardPage(
                                          br(),p(),br(),p(),
                                          
                                          div(id = "random_choice", 
-                                             textOutput("msg1"),br(),
-                                             textOutput("msg2"),br(),
-                                             textOutput("msg3")
+                                             h4(textOutput("msg1")),br(),
+                                             h4(textOutput("msg2")),br(),
+                                             h4(textOutput("msg3"))
                                              )
                                          
                                          ),
                                   column(6,
-                                         leafletOutput("map",width = "200%", height = 600),
+                                         leafletOutput("map",width = "200%", height = 550),
                                          conditionalPanel('input.submit4 >0 && input.submit > 0',
                                                           absolutePanel(id="legend",
                                                                         class = "panel panel-default",
