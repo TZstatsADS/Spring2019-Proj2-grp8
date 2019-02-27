@@ -5,6 +5,7 @@ library(leaflet)
 library(leaflet.extras)
 library(readr)
 library(shinyalert)
+library(rjson)
 restaurant<-data.frame(na.omit(read_csv("../output/restaurant_final.csv")))
 type <- unique(as.character(restaurant$CUISINE))
 namedata<-c("Restaurant","Museum","Theatre","Gallery","Library")
@@ -74,6 +75,7 @@ function(input, output) {
                       "Rating:",restaurant$RATING,"<br/>",
                       "Price:",restaurant$PRICE,"<br/>",
                       "Cuisine:",restaurant$CUISINE,"<br/>",
+                      "Tag:",restaurant$TAG,"<br/>",
                       "Address:",restaurant$ADDRESS,"<br/>",
                       "Grade:",restaurant$GRADE,"<br/>"
                       ),
@@ -246,10 +248,10 @@ function(input, output) {
       }
       else if(input$region1 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,7,8,14)])
+          print(restaurant[,c(1,5,12,6)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,7,8,14)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(1,5,12,6)])
         }
         
       }
@@ -276,10 +278,10 @@ function(input, output) {
       }
       else if(input$region2 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,7,8,14)])
+          print(restaurant[,c(1,5,12,6)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,7,8,14)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(1,5,12,6)])
         }    
       }
     },
@@ -304,10 +306,10 @@ function(input, output) {
       }
       else if(input$region3 == 'Restaurant') {
         if (input$type1 == 'ALL'){
-          print(restaurant[,c(2,7,8,14)])
+          print(restaurant[,c(1,5,12,6)])
         }
         else{
-          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(2,7,8,14)])
+          print(restaurant[restaurant$CUISINE == as.character(input$type1),c(1,5,12,6)])
         }
       }
     },options = list(
