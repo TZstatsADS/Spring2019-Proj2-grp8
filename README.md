@@ -42,14 +42,17 @@ Term: Spring 2019
 		+ Created the three-page frame: cx2225
 		+ Welcome page UI: zc2422, ww2493
 		+ Navigation bar and sidebar CSS design: ww2493
+		+ Search page choice input, dataTable and map layout: zc2422
 		+ Feeling Lucky page CSS design: ww2493
 		+ Modified Feeling Lucky page layout: zc2422
 	+ Server - Welcome Page
+		+ Modified Background add formatted word description zc2422
 	+ Server - Search Page
 		+ Input selection : cx2225, xz2740
-		+ Datatable ouput : cx2225
+		+ DataTable ouput : cx2225
 		+ Reset map button: cx2225
 		+ Create Map : cx2225
+		+ Map sync with datatable output: zc2422
 		+ Map with markers : cx2225, xz2740
 		+ Pop up window of each marker: xz2740
 	+ Server - Feeling Lucky Page
